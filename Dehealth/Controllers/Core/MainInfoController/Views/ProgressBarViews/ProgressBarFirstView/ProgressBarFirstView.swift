@@ -14,7 +14,7 @@ protocol ProgressBarFirstViewDelegate: AnyObject {
 class ProgressBarFirstView: UIView {
 	 //MARK: - Properties
 	weak var delegate: ProgressBarFirstViewDelegate?
-
+    var tourniquets: [Tourniquet] = []
 	private lazy var backButton: UIButton = {
 		let button = UIButton(type: .system)
 		button.setImage(UIImage(named: "CartArrow"), for: .normal)
@@ -70,6 +70,7 @@ class ProgressBarFirstView: UIView {
 		fatalError("init(coder:) has not been implemented")
 	}
 	//MARK: - Functions
+    
 	private func configureUI() {
 		backgroundColor = ProgressBarFirstViewColor.bgColor.color
 		addSubview(backButton)

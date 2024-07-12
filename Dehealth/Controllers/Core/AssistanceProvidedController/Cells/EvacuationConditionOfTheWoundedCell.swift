@@ -17,7 +17,6 @@ class EvacuationConditionOfTheWoundedCell: UICollectionViewCell {
     //MARK: - Properties
     
     static let identifier = "EvacuationConditionOfTheWoundedCell"
-    
     weak var delegate: EvacuationConditionOfTheWoundedCellDelegate?
     private let evacuationLabel: UILabel = {
        let label = UILabel()

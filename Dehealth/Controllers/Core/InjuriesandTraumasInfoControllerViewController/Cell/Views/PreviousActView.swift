@@ -8,11 +8,16 @@
 import UIKit
 
 
+protocol PreviousActViewDelegate: AnyObject {
+    func plusImageViewDidTap()
+}
 class PreviousActView: UIView {
      //MARK: - Properties
+    weak var delegate: PreviousActViewDelegate?
     private let plusImageView: UIImageView = {
        let iv = UIImageView()
         iv.image = UIImage(named: "plus")
+        iv.isUserInteractionEnabled = true
         iv.setWidth(24)
         iv.setHeight(24)
         return iv
@@ -31,13 +36,17 @@ class PreviousActView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureUI()
+        addTapGesture()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     //MARK: - Functions
-    
+    private func addTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(plusImageViewDidTap))
+        plusImageView.addGestureRecognizer(tap)
+    }
     private func configureUI() {
        addSubview(plusImageView)
         addSubview(titleLabel)
@@ -45,6 +54,10 @@ class PreviousActView: UIView {
         plusImageView.anchor(width: 24, height: 24)
         titleLabel.centerY(inView: plusImageView, leftAnchor: plusImageView.rightAnchor, paddingLeft: 5)
         
+    }
+    @objc
+    private func plusImageViewDidTap() {
+        delegate?.plusImageViewDidTap()
     }
     
 }

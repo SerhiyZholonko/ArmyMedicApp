@@ -123,7 +123,6 @@ extension AssistanceProvidedController: UICollectionViewDelegate, UICollectionVi
             return cell
         } else if indexPath.section == 0 && indexPath.row == 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SignsAndSymptomsCell.identifier, for: indexPath) as! SignsAndSymptomsCell
-            
             return cell
         }else if indexPath.section == 0 && indexPath.row == 2 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EvacuationConditionOfTheWoundedCell.identifier, for: indexPath) as! EvacuationConditionOfTheWoundedCell
@@ -134,7 +133,8 @@ extension AssistanceProvidedController: UICollectionViewDelegate, UICollectionVi
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 && indexPath.row == 0{
-            return CGSize(width: view.frame.width, height: 490 + viewModel.medicineHeight + 120)
+            let noteHeight = viewModel.calculateHeight(width: view.frame.width)
+            return CGSize(width: view.frame.width, height: 490 + viewModel.medicineHeight + noteHeight)
                           //+ 136 + 120)
         } else  if indexPath.section == 0 && indexPath.row == 1 {
             return CGSize(width: view.frame.width, height: 86 + 156 + 16)
@@ -204,21 +204,31 @@ extension AssistanceProvidedController: PikerListControlViewDelegate {
     }
     func saveNoteButtonDidTap(titles: [String]) {
         otherWorkView.alpha = 0
-        viewModel.noteControlString = titles.joined(separator: ", ")
+        viewModel.otherWorkString = titles.joined(separator: ", ")
         collectionView.reloadData()
     }
-
 }
 
 extension AssistanceProvidedController: AddNoteViewDelegate {
     func addText(_ text: String) {
+//        if  viewModel.noteControlString == "" {
+//            collectionView.backgroundColor = .black200
+//        } else {
+//            collectionView.backgroundColor = .clear
+//
+//        }
         viewModel.noteControlString = text
         addNoteView.alpha = 0
         view.endEditing(true)
+        let noteHeight = viewModel.calculateHeight(width: view.frame.width)
         collectionView.reloadData()
     }
     
     func cancel() {
+        viewModel.noteControlString = ""
+        addNoteView.alpha = 0
+        view.endEditing(true)
+        collectionView.reloadData()
     }
     
     func close() {

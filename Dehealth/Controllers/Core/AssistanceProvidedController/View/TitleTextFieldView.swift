@@ -40,6 +40,8 @@ class TitleTextFieldView: UIView {
           tf.rightView = view
           tf.keyboardType = .numberPad
         tf.addTarget(self, action: #selector(textChangedTime(_:)), for: .editingChanged)
+        tf.font = UIFont.systemFont(ofSize: 16) // or any other font you prefer
+
           return tf
       }()
      //MARK: - Init

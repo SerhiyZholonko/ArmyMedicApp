@@ -62,6 +62,7 @@ class DeleteAddButtonView: UIView {
     }
     private func setupFunctionsForButton() {
         addButton.addTarget(self, action: #selector(addButtonDidTap), for: .touchUpInside)
+        deleteButton.addTarget(self, action: #selector(deleteButtonDidTap), for: .touchUpInside)
     }
     @objc
     private func addButtonDidTap() {

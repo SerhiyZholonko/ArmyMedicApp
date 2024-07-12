@@ -54,7 +54,7 @@ class AddNoteView: UIView {
         ]
 
         let attributedText = NSAttributedString(
-            string: "У пораненого відкритий перелом лівої нижньої гомілкової кістки. Надали відповідну допомогу. Забинтували і зафіксували кінцівку. Треба везти обережно в лежачому положенні.",
+            string: "",
             attributes: attributes
         )
         tv.attributedText = attributedText
@@ -75,6 +75,9 @@ class AddNoteView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     //MARK: - Functions
+    func setTitle(_ title: String) {
+        self.titleLabel.text = title
+    }
     private func configureUI() {
         backgroundColor = .black700!.withAlphaComponent(0.7)
         addSubview(bgView)
@@ -103,6 +106,7 @@ extension AddNoteView: DeleteAddButtonViewDelegate {
     }
     
     func deleteButtonDidTap() {
+        noteView.text = ""
         delegate?.cancel()
     }
     

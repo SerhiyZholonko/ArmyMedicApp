@@ -9,6 +9,7 @@ import UIKit
 
 class InjuriesandTraumasInfoViewController: UIViewController {
 	 //MARK: - Properties
+    private var viewModel = InjuriesandTraumasInfoViewControllerViewModel()
 	private lazy var headerView: ProgressBarFirstView = {
 		let view = ProgressBarFirstView()
 		view.oneView.setupNumber(number: .nil)
@@ -25,18 +26,31 @@ class InjuriesandTraumasInfoViewController: UIViewController {
 		let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
 		cv.delegate = self
 		cv.dataSource = self
-		cv.backgroundColor = .systemBlue
+		cv.backgroundColor = .clear
 		return cv
 	}()
 	private let bottomView: BottomView = {
 		let view = BottomView()
 		return view
 	}()
-
+    private lazy var addPreliminaryDiagnosisView: AddNoteView = {
+        let view = AddNoteView()
+        view.setTitle("Попередній діагноз")
+        view.delegate = self
+        view.alpha = 0
+        return view
+    }()
+    private lazy var addTourniquetView: AddTourniquetView = {
+       let view = AddTourniquetView()
+        view.delegate = self
+        view.alpha = 0
+        return view
+    }()
 	//MARK: - Livecycle
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		configureUI()
+        configureCollectionView()
 		configureBottomView()
 		configureHeader()
 		collectionView.delegate = self
@@ -50,6 +64,11 @@ class InjuriesandTraumasInfoViewController: UIViewController {
 	private func configureBottomView() {
 		bottomView.delegate = self
 	}
+    private func configureCollectionView() {
+        collectionView.register(InjuriesAndTraumasCell.self, forCellWithReuseIdentifier: InjuriesAndTraumasCell.identifier)
+        collectionView.register(TourniquetCell.self, forCellWithReuseIdentifier: TourniquetCell.identifier)
+        collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.identifier)
+    }
 	private func configureUI() {
 		view.backgroundColor = UIColor(named: "BGColor")
 
@@ -62,8 +81,7 @@ class InjuriesandTraumasInfoViewController: UIViewController {
 
 //		// Register collection view cells
 
-		collectionView.register(InjuriesAndTraumasCell.self, forCellWithReuseIdentifier: InjuriesAndTraumasCell.identifier)
-		collectionView.register(TourniquetCell.self, forCellWithReuseIdentifier: TourniquetCell.identifier)
+	
 		
 		// Add collection view to the view hierarchy
 		view.addSubview(headerView)
@@ -74,6 +92,10 @@ class InjuriesandTraumasInfoViewController: UIViewController {
 		collectionView.anchor(top: headerView.bottomAnchor, left: view.leftAnchor, bottom: bottomView.topAnchor, right: view.rightAnchor)
 		// Reload collection view data if needed
 //		collectionView.reloadData()
+        view.addSubview(addPreliminaryDiagnosisView)
+        addPreliminaryDiagnosisView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
+        view.addSubview(addTourniquetView)
+        addTourniquetView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
 	}
 }
 
@@ -87,7 +109,6 @@ extension InjuriesandTraumasInfoViewController: ProgressBarFirstViewDelegate {
 	}
 }
 func numberOfSections(in collectionView: UICollectionView) -> Int {
-	// Return the number of sections in the collection view
 	return 1
 }
 extension InjuriesandTraumasInfoViewController: BottomViewDelegate {
@@ -112,27 +133,35 @@ extension InjuriesandTraumasInfoViewController: UICollectionViewDelegate, UIColl
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		if indexPath.section == 0 && indexPath.row == 0 {
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InjuriesAndTraumasCell.identifier, for: indexPath) as! InjuriesAndTraumasCell
+            cell.configureCell(viewModel: viewModel)
 			cell.delegate = self
 			return cell
-		} else if indexPath.section == 0 && indexPath.row == 1 {
+		} else
+        if indexPath.section == 0 && indexPath.row == 1 {
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TourniquetCell.identifier, for: indexPath) as! TourniquetCell
+            cell.setTitle(title: "Турнікет")
+            cell.updateViewModel(viewModel: viewModel)
+            cell.delegate = self
 			return cell
 		} else {
-			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TourniquetCell.identifier, for: indexPath) as! TourniquetCell
-			cell.setTitle(title: "Фото та відео")
+			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.identifier, for: indexPath) as! PhotoCell
+			cell.setTitle(title: "Фото")
+            cell.delegate = self
 			return cell
 		}
 		
 		
 	}
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-		// Adjust the size according to your needs
 		if indexPath.section == 0 && indexPath.row == 0 {
-			return CGSize(width: collectionView.frame.width, height: 396) // Example size
-
-		} else {
-			return CGSize(width: collectionView.frame.width, height: 64) // Example size
-		}
+            let height = viewModel.calculateHeight(width: collectionView.frame.width)
+            return CGSize(width: collectionView.frame.width, height: 348 + (viewModel.isNotDiagnoseOrColorsOfMark ? 48 : height + 24) + CGFloat( viewModel.colorsSetListIsEmpty ? 0 : 50))
+		} else if indexPath.section == 0 && indexPath.row == 1  {
+            
+            return CGSize(width: collectionView.frame.width, height: 64 + viewModel.tourniquetHeight) // Example size
+        } else {
+            return CGSize(width: collectionView.frame.width, height: 56)
+        }
 	}
 
 }
@@ -142,19 +171,71 @@ extension InjuriesandTraumasInfoViewController: UICollectionViewDelegate, UIColl
  //MARK: - extension delegate
 
 extension InjuriesandTraumasInfoViewController: InjuriesAndTraumasCellDelegate {
+    func textWillChange(text: String) {
+        viewModel.preliminaryDiagnosis = text
+        addPreliminaryDiagnosisView.alpha = 1
+    }
+    func addDiagnose() {
+        addPreliminaryDiagnosisView.alpha = 1
+    }
+    func reloadCollectionView() {
+        collectionView.reloadData()
+    }
 	func openVCForAddInjuries() {
-		
 		let vc = InjuriesAndWoundsController()
 		vc.modalPresentationStyle = .fullScreen
 		present(vc, animated: true)
 	}
-	
-	
 }
 
+extension InjuriesandTraumasInfoViewController: AddNoteViewDelegate {
+    func addText(_ text: String) {
+        viewModel.preliminaryDiagnosis = text
+        addPreliminaryDiagnosisView.alpha =  0
+        collectionView.reloadData()
+    }
+    
+    func cancel() {
+        viewModel.preliminaryDiagnosis = ""
+        addPreliminaryDiagnosisView.alpha =  0
+        collectionView.reloadData()
+    }
+    
+    func close() {
+        addPreliminaryDiagnosisView.alpha =  0
+        view.endEditing(true)
+    }
+    
+    
+}
 
+extension InjuriesandTraumasInfoViewController: TourniquetCellDelegate {
+    func addItem() {
+        addTourniquetView.alpha = 1
 
+    }
+    
+    
+}
 
-#Preview() {
-    InjuriesandTraumasInfoViewController()
+extension InjuriesandTraumasInfoViewController: PhotoCellDelegate {
+    func addButtonDidTap() {
+        
+    }
+}
+extension InjuriesandTraumasInfoViewController: AddTourniquetViewDelegate {
+    func saveTourniquet(_ tourniquet: Tourniquet) {
+        addTourniquetView.alpha = 0
+        //TODO: - create tourniquet array
+        viewModel.addNewTourniquet(tourniquet)
+        collectionView.reloadData()
+        
+        
+    }
+    
+    func closeBottonDidTap() {
+        addTourniquetView.alpha = 0
+    }
+    
+    
 }

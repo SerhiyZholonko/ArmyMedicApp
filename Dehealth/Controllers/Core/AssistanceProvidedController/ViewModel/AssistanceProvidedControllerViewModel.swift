@@ -5,7 +5,7 @@
 //  Created by apple on 19.06.2024.
 //
 
-import Foundation
+import UIKit
 
 protocol AssistanceProvidedControllerViewModelDelegate: AnyObject {
     func reloadCollectionView()
@@ -43,5 +43,12 @@ class AssistanceProvidedControllerViewModel {
     func getMedicine(by indexPath: IndexPath) -> Medicine? {
         return medicines[indexPath.row]
     }
-    
+    func calculateHeight( width: CGFloat) -> CGFloat {
+        let tempTextView = UITextView()
+        tempTextView.text = noteControlString
+        tempTextView.font = UIFont.systemFont(ofSize: noteControlString == "" ? 0 : 16) // Make sure this matches your textView font
+        tempTextView.frame.size = CGSize(width: width - (noteControlString == "" ? 0 : 32), height: CGFloat.greatestFiniteMagnitude) // Subtract padding
+        let size = tempTextView.sizeThatFits(CGSize(width: width - (noteControlString == "" ? 0 : 32), height: CGFloat.greatestFiniteMagnitude))
+        return size.height + (noteControlString == "" ? 0 : 32) // Add padding
+      }
 }

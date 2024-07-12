@@ -19,8 +19,21 @@ class NoteCollectionViewCell: UICollectionViewCell {
         let tv = UITextView(frame: .zero)
         tv.text = ""
         tv.backgroundColor = .clear
+        tv.font = .interLight(size: 14)
+        // Set line height
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 6 // Adjust the line spacing as needed
+        tv.isScrollEnabled = false
+        let attributes: [NSAttributedString.Key: Any] = [
+            .paragraphStyle: paragraphStyle
+        ]
+
+        let attributedText = NSAttributedString(string: tv.text, attributes: attributes)
+        tv.attributedText = attributedText
+        tv.isEditable = false
         return tv
     }()
+
      //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,10 +58,10 @@ class NoteCollectionViewCell: UICollectionViewCell {
     static func calculateHeight(for text: String, width: CGFloat) -> CGFloat {
           let tempTextView = UITextView()
           tempTextView.text = text
-          tempTextView.font = UIFont.systemFont(ofSize: 14) // Make sure this matches your textView font
+          tempTextView.font = UIFont.systemFont(ofSize: 16) // Make sure this matches your textView font
           tempTextView.frame.size = CGSize(width: width - 32, height: CGFloat.greatestFiniteMagnitude) // Subtract padding
           let size = tempTextView.sizeThatFits(CGSize(width: width - 32, height: CGFloat.greatestFiniteMagnitude))
-          return size.height + 24 // Add padding
+          return size.height + 32  // Add padding
       }
     func makeTextViewFirstResponder() {
             noteTextView.becomeFirstResponder()
@@ -60,6 +73,7 @@ class NoteCollectionViewCell: UICollectionViewCell {
 extension NoteCollectionViewCell: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
             // Handle text changes here
+        
         delegate?.updateText(string: textView.text, cell: self)
         }
 }

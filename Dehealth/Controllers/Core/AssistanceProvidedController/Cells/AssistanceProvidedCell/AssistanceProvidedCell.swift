@@ -80,6 +80,7 @@ class AssistanceProvidedCell: UICollectionViewCell {
     private lazy var notesCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.backgroundColor = .clear
         cv.delegate = self
         cv.dataSource = self
         return cv
@@ -107,7 +108,6 @@ class AssistanceProvidedCell: UICollectionViewCell {
         self.viewModel = viewModel
         medicinesAndDrugsCollectionView.reloadData()
         notesCollectionView.reloadData()
-//        delegate?.reloadCell()
     }
     private func configureUI() {
         backgroundColor = .black200
@@ -166,7 +166,7 @@ class AssistanceProvidedCell: UICollectionViewCell {
 }
 
 
-//
+
 //#Preview() {
 //    AssistanceProvidedController()
 //}
@@ -188,13 +188,15 @@ extension AssistanceProvidedCell: UICollectionViewDelegate, UICollectionViewData
                 cell.configureCell(model: viewModel.medicines[indexPath.row])
             }
             return cell
-        } else {
+        } else if  collectionView == notesCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoteCollectionViewCell.identifier, for: indexPath) as! NoteCollectionViewCell
             cell.delegate = self
             if let viewModel =  viewModel {
                 cell.configure(with: viewModel.noteControlString)
             }
             return cell
+        } else {
+           return UICollectionViewCell()
         }
     }
     
@@ -203,6 +205,19 @@ extension AssistanceProvidedCell: UICollectionViewDelegate, UICollectionViewData
             return CGSize(width: collectionView.frame.width, height: 68)
         } else if collectionView == notesCollectionView {
             if let viewModel = viewModel {
+                if viewModel.noteControlString == "" {
+                    collectionView.backgroundColor = .clear
+
+                    return CGSize(width: collectionView.frame.width, height: 0)
+                } 
+//                else {
+//                    collectionView.backgroundColor = .white
+//
+//                    let height = viewModel.calculateHeight(width: collectionView.frame.width)
+//                    return CGSize(width: collectionView.frame.width, height: height)
+//                }
+//                collectionView.backgroundColor = .white
+
                 let text = viewModel.noteControlString
                  let width = collectionView.frame.width - 32 // Subtract padding
                let height = NoteCollectionViewCell.calculateHeight(for: text, width: width)
@@ -239,22 +254,14 @@ extension AssistanceProvidedCell: DropdownSelectionViewDelegate {
 
 extension AssistanceProvidedCell: NoteCollectionViewCellDelegate {
     func updateText(string: String, cell: NoteCollectionViewCell) {
-        viewModel?.noteControlString = string
+        if string == "" {
+            notesCollectionView.backgroundColor = .clear
+        } else  {
+            notesCollectionView.backgroundColor = .white
+        }
         notesCollectionView.reloadData()
+        viewModel?.noteControlString = string
 
-        //        if let noteString = viewModel?.noteControlString {
-        //            let concatenatedString = noteString + string
-        //            // Use concatenatedString as needed
-        //            viewModel!.noteControlString = concatenatedString
-        //                    notesCollectionView.reloadData()
-        //
-        //        } else {
-        //            // Handle the case where viewModel?.noteControlString is nil
-        //        }
-        ////        DispatchQueue.main.async {
-        ////            cell.makeTextViewFirstResponder()
-        ////        }
-        //    }
     }
     
 }

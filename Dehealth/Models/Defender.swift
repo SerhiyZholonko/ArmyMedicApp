@@ -95,6 +95,55 @@ struct Tourniquet: Codable {
     let releasedAt: String // Use Date if needed
 }
 
+enum StateSegment: Int, CaseIterable {
+    case leftHand = 0
+    case rightHand
+    case leftLeg
+    case rightLeg
+    
+    var title: String {
+        switch self {
+        case .leftHand: return "Ліва рука"
+        case .rightHand: return "Права рука"
+        case .leftLeg: return "Ліва нога"
+        case .rightLeg: return "Права нога"
+        }
+    }
+}
+enum BodyPlace: Int, CaseIterable {
+    case limbs = 0
+    case knotty
+    case abdominal
+    
+    var title: String {
+        switch self {
+        case .limbs: return "Для кінцівок"
+        case .knotty: return "Вузловий"
+        case .abdominal: return "Абдомінальний"
+        }
+    }
+}
+enum TourniquetType: Int, CaseIterable {
+    case cat7 = 0
+    case soft
+    case samxt
+    case tmt
+    case sich
+    case dnipro
+    case custom
+    
+    var title: String {
+        switch self {
+        case .cat7: return "CAT 7"
+        case .soft: return "SOF-T"
+        case .samxt: return "SAM-XT"
+        case .tmt: return "TMT"
+        case .sich: return "SICH"
+        case .dnipro: return "Dnipro"
+        case .custom: return "Вказати свій варіант"
+        }
+    }
+}
 struct HealthCheck: Codable {
     let madeAt: String // Use Date if needed
     let pulse: Int
