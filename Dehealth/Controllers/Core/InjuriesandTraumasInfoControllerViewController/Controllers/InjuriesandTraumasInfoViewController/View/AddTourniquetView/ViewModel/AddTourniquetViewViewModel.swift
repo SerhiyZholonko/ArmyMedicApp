@@ -10,11 +10,14 @@ import Foundation
 
 
 struct AddTourniquetViewViewModel {
-    var isTypeOfTurnstile: Bool = false
+    var isTypeOfTurnstileForLimbs: Bool = false
+    var isTypeOfTurnstileForNodal: Bool = false
+    var isTypeOfTurnstileForAbdominal: Bool = false
+    var selectedIndex: IndexPath?
+
     var method: Int = 0
     var state: Int = 0
-    var limb: Int?
-    //heand or legs
+    var limb: Int? //кінцівка, heand or legs
     var type: Int?
     var appliedAt = ""
     var releasedAt = ""
@@ -22,9 +25,17 @@ struct AddTourniquetViewViewModel {
     var typeOfTurnstile: String = "CAT 7"
     var overlayTypeTurnstile: String = ""
     var time: String?
-    let typeOfTurnstileList: [String] = ["CAT 7", "SOF-T", "SAM-XT", "TMT", "SICH", "Dnipro", "Вказати свій варіант"]
+    let typeOfTurnstileListForLimbs: [String] = ["CAT 7", "SOF-T", "SAM-XT", "TMT", "SICH", "Dnipro", "Вказати свій варіант"]
+    let typeOfTurnstileListForNodal: [String] = ["SAM JT", "AAJT-S", "CRoC", "JETT", "Вказати свій варіант"]
+    let typeOfTurnstileListForAbdominal: [String] = ["AAJT-S", "CRoC", "Вказати свій варіант"]
+
      //MARK: - Functions
-    
+    mutating func updateData() {
+        self.limb = nil
+        self.time = nil
+        self.type = nil
+        
+    }
     mutating func getTurnstileForSave() -> Tourniquet? {
         guard validation() else { return nil }
         if let time = time {
@@ -84,18 +95,36 @@ struct AddTourniquetViewViewModel {
     }
     private func validation() -> Bool {
 //        guard method != nil else { return false }
-        guard state != nil else {return false}
+//        guard state != nil else {return false}
+      //limb == nil
         guard limb != nil else {return false}
         guard type != nil else {return false}
         return true
     }
     mutating func getIndex(_ indexPath: IndexPath){
-        let item = typeOfTurnstileList[indexPath.item]
-        if let index = typeOfTurnstileList.firstIndex(of: "SAM-XT") {
-            print("The index of SAM-XT is \(index)")
-            self.type = index
-        } else {
-            print("SAM-XT is not found in the array")
+        if isTypeOfTurnstileForLimbs {
+            let item = typeOfTurnstileListForLimbs[indexPath.item]
+            if let index = typeOfTurnstileListForLimbs.firstIndex(of: item) {
+                self.type = index
+                print("\(index), \(typeOfTurnstileListForLimbs[indexPath.item])")
+            } else {
+                print("\(item) is not found in the array")
+            }
+        } else if isTypeOfTurnstileForNodal {
+            let item = typeOfTurnstileListForNodal[indexPath.item]
+            if let index = typeOfTurnstileListForNodal.firstIndex(of: item) {
+                print("\(index), \(item)")
+                self.type = index
+            } else {
+                print("\(item) is not found in the array")
+            }
+        } else if isTypeOfTurnstileForAbdominal {
+            let item = typeOfTurnstileListForAbdominal[indexPath.item]
+            if let index = typeOfTurnstileListForAbdominal.firstIndex(of: item) {
+                self.type = index
+            } else {
+                print("\(item) is not found in the array")
+            }
         }
     }
 }

@@ -33,7 +33,7 @@ class AssistanceProvidedController: UIViewController {
     private let bottomView: BottomView = {
         let view = BottomView()
         view.setTitleForLeftButton("Зберегти картку")
-        view.setIsEnableLeftButton(true)
+        view.setIsEnableRightButton(true)
         return view
     }()
     private lazy var addThePreparationView: AddThePreparationView = {
@@ -48,7 +48,6 @@ class AssistanceProvidedController: UIViewController {
         view.setListArray(["Тиснуча повязка", "Гемостатичні засоби", "Конверсія", "Переливання крові"])
         view.delegate = self
         view.alpha = 0
-//        view.setHeightForView(308)
         return view
     }()
     private lazy var devicesForBreathingRecoveryView: PikerListControlView = {
@@ -84,9 +83,7 @@ class AssistanceProvidedController: UIViewController {
     }
     
      //MARK: - Functions
-//    private func configureViewModel() {
-//        viewModel.delegate = self
-//    }
+
     private func configureCollectionView() {
         collectionView.register(AssistanceProvidedCell.self, forCellWithReuseIdentifier: AssistanceProvidedCell.identifier)
         collectionView.register(SignsAndSymptomsCell.self, forCellWithReuseIdentifier: SignsAndSymptomsCell.identifier)
@@ -211,12 +208,7 @@ extension AssistanceProvidedController: PikerListControlViewDelegate {
 
 extension AssistanceProvidedController: AddNoteViewDelegate {
     func addText(_ text: String) {
-//        if  viewModel.noteControlString == "" {
-//            collectionView.backgroundColor = .black200
-//        } else {
-//            collectionView.backgroundColor = .clear
-//
-//        }
+
         viewModel.noteControlString = text
         addNoteView.alpha = 0
         view.endEditing(true)
@@ -235,18 +227,4 @@ extension AssistanceProvidedController: AddNoteViewDelegate {
         addNoteView.alpha = 0
         view.endEditing(true)
     }
-    
-    
 }
-//#Preview() {
-//    AssistanceProvidedController()
-//}
-
-
-// delegate viewModel
-
-//extension AssistanceProvidedController: AssistanceProvidedControllerViewModelDelegate {
-//    func reloadCollectionView() {
-//        collectionView.reloadData()
-//    }
-//}

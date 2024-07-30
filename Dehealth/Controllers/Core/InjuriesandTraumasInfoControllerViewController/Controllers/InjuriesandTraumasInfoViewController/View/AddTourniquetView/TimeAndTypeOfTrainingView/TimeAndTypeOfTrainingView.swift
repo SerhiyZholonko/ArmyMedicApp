@@ -47,6 +47,9 @@ class TypeOfTrainingView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     //MARK: - Functions
+    func updateTime() {
+        timeTurnstileView.updateTimeTextField()
+    }
     func selectFirstButton() {
         typeRadioButtonsView.selectDefaultButton(.pikedOne)
     }

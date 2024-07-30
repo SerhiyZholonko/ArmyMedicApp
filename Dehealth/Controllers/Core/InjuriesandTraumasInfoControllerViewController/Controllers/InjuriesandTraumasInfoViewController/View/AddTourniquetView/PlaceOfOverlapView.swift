@@ -105,6 +105,10 @@ class PlaceOfOverlapView: UIView {
     }
     
     // MARK: - Functions
+    func updateSegmentedControl() {
+        legsSegmentedControl.selectedSegmentIndex = UISegmentedControl.noSegment
+        handsSegmentedControl.selectedSegmentIndex = UISegmentedControl.noSegment
+    }
     private func configureUI() {
         addSubview(titleLabel)
         titleLabel.anchor(top: topAnchor, left: leftAnchor, height: 24)

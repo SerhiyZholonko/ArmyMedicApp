@@ -8,6 +8,7 @@
 import UIKit
 
 protocol TourniquetCellDelegate: AnyObject {
+    func didTapEditButton(on cell: PlaceOnBodyCollectionViewCell, at cellFrameInSuperview: CGRect)
     func addItem()
 }
 enum TourniquetCellStyle {
@@ -84,11 +85,8 @@ class TourniquetCell: UICollectionViewCell {
     @objc
     private func addButtonDidTap() {
         delegate?.addItem()
-        print("Test addButtonDidTap")
     }
-   
 }
-
 
 
 extension TourniquetCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -97,6 +95,9 @@ extension TourniquetCell: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlaceOnBodyCollectionViewCell.identifier, for: indexPath) as! PlaceOnBodyCollectionViewCell
+        cell.delegate = self
+//        cell.isEdit = false
+        cell.editButtonTapped()
         if let viewModel = viewModel {
             cell.configureCell(model: viewModel.getTourniquet(indexPath: indexPath))
         }
@@ -105,5 +106,45 @@ extension TourniquetCell: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: frame.width, height: 103)
+    }
+}
+
+
+
+extension TourniquetCell: PlaceOnBodyCollectionViewCellDelegate {
+    
+    func didTapEditButton(on cell: PlaceOnBodyCollectionViewCell) {
+        guard let indexPath = placeOnBodyCollectionView.indexPath(for: cell) else { return }
+
+        // Get the cell's frame in the collection view's coordinate system
+        let cellFrame = placeOnBodyCollectionView.layoutAttributesForItem(at: indexPath)?.frame ?? .zero
+        let cellFrameInSuperview = placeOnBodyCollectionView.convert(cellFrame, to: placeOnBodyCollectionView.superview)
+
+        // Create an overlay view
+        let overlayView = UIView(frame: bounds)
+        overlayView.backgroundColor = .clear
+        //UIColor.black.withAlphaComponent(0.5)
+        overlayView.tag = 999 // Set a tag to identify the overlay view later
+
+        // Add the custom subview to the overlay
+        let customSubview = EditView()
+        overlayView.addSubview(customSubview)
+        customSubview.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            customSubview.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: cellFrameInSuperview.minX - 40),
+            customSubview.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: cellFrameInSuperview.maxY - 60),
+            customSubview.heightAnchor.constraint(equalToConstant: 83),
+            customSubview.widthAnchor.constraint(equalToConstant: 200)
+        ])
+        // Add a tap gesture recognizer to dismiss the overlay
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissOverlay(_:)))
+        overlayView.addGestureRecognizer(tapGesture)
+        // Add the overlay to the main view
+        addSubview(overlayView)
+    }
+
+    @objc private func dismissOverlay(_ sender: UITapGestureRecognizer) {
+        sender.view?.removeFromSuperview()
+        placeOnBodyCollectionView.reloadData()
     }
 }

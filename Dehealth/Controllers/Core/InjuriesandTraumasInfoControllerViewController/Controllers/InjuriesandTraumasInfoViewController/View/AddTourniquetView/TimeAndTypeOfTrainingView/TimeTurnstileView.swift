@@ -20,6 +20,7 @@ class TimeTurnstileView: UIView {
         tf.layer.cornerRadius = 6
         tf.layer.borderColor = UIColor.black200!.cgColor
         tf.layer.borderWidth = 1
+        tf.font = .interMedium(size: 16)
         // Add padding to the left
         let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 12, height: tf.frame.height))
         tf.leftView = leftPaddingView
@@ -43,6 +44,9 @@ class TimeTurnstileView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     //MARK: - Functions
+    func updateTimeTextField() {
+        timeTextField.text = ""
+    }
     private func configureUI() {
         addSubview(timeTextField)
         timeTextField.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor)

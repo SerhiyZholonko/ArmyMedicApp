@@ -87,7 +87,7 @@ extension UIView {
 		translatesAutoresizingMaskIntoConstraints = false
 		heightAnchor.constraint(equalToConstant: height).isActive = true
 	}
-	
+ 
 	func setWidth(_ width: CGFloat) {
 		translatesAutoresizingMaskIntoConstraints = false
 		widthAnchor.constraint(equalToConstant: width).isActive = true
@@ -99,4 +99,31 @@ extension UIView {
 		anchor(top: view.topAnchor, left: view.leftAnchor,
 			   bottom: view.bottomAnchor, right: view.rightAnchor)
 	}
+}
+extension UIView {
+    func addShadow(x: CGFloat, y: CGFloat, blur: CGFloat, spread: CGFloat, color: UIColor, opacity: Float) {
+        layer.masksToBounds = false
+        layer.shadowColor = color.cgColor
+        layer.shadowOpacity = opacity
+        layer.shadowOffset = CGSize(width: x, height: y)
+        layer.shadowRadius = blur / 2.0
+
+        if spread == 0 {
+            layer.shadowPath = nil
+        } else {
+            let dx = -spread
+            let rect = bounds.insetBy(dx: dx, dy: dx)
+            layer.shadowPath = UIBezierPath(rect: rect).cgPath
+        }
+    }
+}
+
+
+import UIKit
+
+extension UIView {
+    func halfOfScreenSize() -> CGSize {
+        let screenSize = UIScreen.main.bounds.size
+        return CGSize(width: screenSize.width / 2, height: screenSize.height / 2)
+    }
 }

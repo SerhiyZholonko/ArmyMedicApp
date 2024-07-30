@@ -20,12 +20,14 @@ class TypeOfTurnstileView: UIView {
         label.font = .interLight(size: 14)
         return label
     }()
-    private let dropBoxView: UIView = {
+    private lazy var dropBoxView: UIView = {
        let view = UIView()
         view.backgroundColor = .black100!
         view.layer.cornerRadius = 6
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.black200!.cgColor
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(dropBoxButtonDidTap))
+//        view.addGestureRecognizer(tap)
         return view
     }()
     private let dropBoxLabel: UILabel = {
@@ -56,6 +58,9 @@ class TypeOfTurnstileView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     //MARK: - Functions
+    func updateLabel() {
+        dropBoxLabel.text = ""
+    }
     func setTitle(_ title: String) {
         dropBoxLabel.text = title
     }

@@ -79,10 +79,6 @@ class InjuriesandTraumasInfoViewController: UIViewController {
 		// Initialize collection view with layout
 		collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
 
-//		// Register collection view cells
-
-	
-		
 		// Add collection view to the view hierarchy
 		view.addSubview(headerView)
 		view.addSubview(bottomView)
@@ -91,7 +87,6 @@ class InjuriesandTraumasInfoViewController: UIViewController {
 		bottomView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, height: 100)
 		collectionView.anchor(top: headerView.bottomAnchor, left: view.leftAnchor, bottom: bottomView.topAnchor, right: view.rightAnchor)
 		// Reload collection view data if needed
-//		collectionView.reloadData()
         view.addSubview(addPreliminaryDiagnosisView)
         addPreliminaryDiagnosisView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
         view.addSubview(addTourniquetView)
@@ -120,8 +115,6 @@ extension InjuriesandTraumasInfoViewController: BottomViewDelegate {
 	func moveToBackSection() {
 		navigationController?.popViewController(animated: true)
 	}
-	
-	
 }
 
  //MARK: - CollectionView
@@ -149,45 +142,162 @@ extension InjuriesandTraumasInfoViewController: UICollectionViewDelegate, UIColl
             cell.delegate = self
 			return cell
 		}
-		
-		
 	}
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
 		if indexPath.section == 0 && indexPath.row == 0 {
             let height = viewModel.calculateHeight(width: collectionView.frame.width)
-            return CGSize(width: collectionView.frame.width, height: 348 + (viewModel.isNotDiagnoseOrColorsOfMark ? 48 : height + 24) + CGFloat( viewModel.colorsSetListIsEmpty ? 0 : 50))
+            return CGSize(width: collectionView.frame.width, height: 348 + (viewModel.isNotDiagnose ? 48 : height + 24) + 40 + (viewModel.colorsSetListIsEmpty ? 0 : 70))
 		} else if indexPath.section == 0 && indexPath.row == 1  {
-            
-            return CGSize(width: collectionView.frame.width, height: 64 + viewModel.tourniquetHeight) // Example size
+            return CGSize(width: collectionView.frame.width, height: 56 + viewModel.tourniquetHeight) // Example size
         } else {
             return CGSize(width: collectionView.frame.width, height: 56)
         }
 	}
 
 }
-
-
-
+//MARK: - Add InjuriesandTraumas list view
  //MARK: - extension delegate
+extension InjuriesandTraumasInfoViewController: InjuriesAndTraumasCellDelegate, UIGestureRecognizerDelegate {
+    func showInjuryList(on cell: InjuriesAndTraumasCell) {
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
 
-extension InjuriesandTraumasInfoViewController: InjuriesAndTraumasCellDelegate {
+        let cellFrame = collectionView.layoutAttributesForItem(at: indexPath)?.frame ?? .zero
+        let cellFrameInSuperview = collectionView.convert(cellFrame, to: collectionView.superview)
+
+        let overlayView = UIView(frame: view.bounds)
+        overlayView.tag = 999
+        let injuriesAndTraumasListView = InjuriesAndTraumasListView()
+        injuriesAndTraumasListView.delegate = self // Set delegate here
+        overlayView.addSubview(injuriesAndTraumasListView)
+        
+        //TODO: - extra view 
+        let injuriesAndTraumasListDetailView = InjuriesAndTraumasListDetailView()
+        injuriesAndTraumasListDetailView.delegate = self
+        overlayView.addSubview(injuriesAndTraumasListDetailView) // Add subCustomView to customSubview
+        
+        injuriesAndTraumasListView.translatesAutoresizingMaskIntoConstraints = false
+        injuriesAndTraumasListDetailView.translatesAutoresizingMaskIntoConstraints = false
+
+        let height = viewModel.calculateHeight(width: collectionView.frame.width)
+        let adjustedTopConstant = cellFrameInSuperview.maxY - (325 + height + 40 - (viewModel.isNotDiagnose ? 40 : 25) - (viewModel.isColorEmpty ? 0 : -65))
+        
+        NSLayoutConstraint.activate([
+            injuriesAndTraumasListView.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: cellFrameInSuperview.minX - 32),
+            injuriesAndTraumasListView.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: adjustedTopConstant),
+            injuriesAndTraumasListView.heightAnchor.constraint(equalToConstant: 384),
+            injuriesAndTraumasListView.widthAnchor.constraint(equalToConstant: 220),
+            
+            injuriesAndTraumasListDetailView.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: cellFrameInSuperview.minX - 32),
+            injuriesAndTraumasListDetailView.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: adjustedTopConstant),
+            injuriesAndTraumasListDetailView.widthAnchor.constraint(equalToConstant: 220),
+            injuriesAndTraumasListDetailView.heightAnchor.constraint(equalToConstant: 300)
+        ])
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeOverlay(_:)))
+        tapGesture.delegate = self
+        overlayView.addGestureRecognizer(tapGesture)
+
+        view.addSubview(overlayView)
+    }
+
+    @objc private func removeOverlay(_ sender: UITapGestureRecognizer) {
+        guard let overlayView = sender.view else { return }
+        let location = sender.location(in: overlayView)
+        if let customSubview = overlayView.subviews.first(where: { $0 is InjuriesAndTraumasListView }) {
+                if customSubview.alpha == 1 {
+                    overlayView.removeFromSuperview()
+                    collectionView.reloadData()
+                } else if !customSubview.frame.contains(location) {
+                    customSubview.alpha = 0
+                    collectionView.reloadData()
+                }
+        }
+    }
+
+       // UIGestureRecognizerDelegate method
+       func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+           if let view = gestureRecognizer.view, let customSubview = view.subviews.first(where: { $0 is InjuriesAndTraumasListView }) {
+               let location = touch.location(in: customSubview)
+               return !customSubview.bounds.contains(location)
+           }
+           if let view = gestureRecognizer.view, let customSubview = view.subviews.last(where: { $0 is InjuriesAndTraumasListDetailView }) {
+               let location = touch.location(in: customSubview)
+               return !customSubview.bounds.contains(location)
+           }
+           return true
+       }
+
+
     func textWillChange(text: String) {
         viewModel.preliminaryDiagnosis = text
         addPreliminaryDiagnosisView.alpha = 1
     }
+
     func addDiagnose() {
         addPreliminaryDiagnosisView.alpha = 1
     }
+
     func reloadCollectionView() {
         collectionView.reloadData()
     }
-	func openVCForAddInjuries() {
-		let vc = InjuriesAndWoundsController()
-		vc.modalPresentationStyle = .fullScreen
-		present(vc, animated: true)
-	}
+
+    func openVCForAddInjuries() {
+        let vc = InjuriesAndWoundsController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
 }
 
+//TODO: - now
+extension InjuriesandTraumasInfoViewController: InjuriesAndTraumasListViewDelegate {
+    func setCustomSubviewAlpha(to alpha: CGFloat, model: InjuriesAndTraumasModel) {
+        if let overlayView = view.viewWithTag(999),
+           let customSubview = overlayView.subviews.first(where: { $0 is InjuriesAndTraumasListView }),
+           let subCustomView = overlayView.subviews.last(where: { $0 is InjuriesAndTraumasListDetailView }) as? InjuriesAndTraumasListDetailView {
+           
+            UIView.animate(withDuration: 0.2) { [weak self] in
+                switch model.typeOfTransition {
+                    
+                case .withSection:
+                    let viewModel = InjuriesAndTraumasListDetailViewModel(type: .percussion)
+                    subCustomView.updateViewModel(viewModel: viewModel) // Correctly calling the method
+                    subCustomView.alpha = 1
+                    customSubview.alpha = 0
+                case .burns:
+                    break
+                case .headInjury:
+                    if let overlayView = self?.view.viewWithTag(999),
+                       let customSubview = overlayView.subviews.first(where: { $0 is InjuriesAndTraumasListView }){
+                            UIView.animate(withDuration: 0.2) {
+                                customSubview.alpha = 0
+                                overlayView.removeFromSuperview()
+                        }
+                    }
+                    let item = InjuriesAndTraumasModel(imageName: "headInjury", title: "Травма голови", typeOfTransition: .headInjury)
+                    self?.viewModel.markedInjuriesandTraumasList.append(item)
+                    self?.collectionView.reloadData()
+                case .marksWithTheHelpOfGesture:
+                    subCustomView.alpha = 1
+                    customSubview.alpha = 0
+                case .none:
+                    break
+                }
+            }
+        }
+    }
+    
+    func presentVCForAddInjuries(_ model: InjuriesAndTraumasModel) {
+        if let overlayView = view.viewWithTag(999) {
+            overlayView.removeFromSuperview()
+        }
+        collectionView.reloadData()
+        let vc = SetWoundingController()
+        vc.setupModel(model)
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+}
 extension InjuriesandTraumasInfoViewController: AddNoteViewDelegate {
     func addText(_ text: String) {
         viewModel.preliminaryDiagnosis = text
@@ -209,13 +319,14 @@ extension InjuriesandTraumasInfoViewController: AddNoteViewDelegate {
     
 }
 
+
 extension InjuriesandTraumasInfoViewController: TourniquetCellDelegate {
     func addItem() {
-        addTourniquetView.alpha = 1
-
+           addTourniquetView.alpha = 1
+       }
+    func didTapEditButton(on cell: PlaceOnBodyCollectionViewCell, at cellFrameInSuperview: CGRect) {
+        showOverlay(at: cellFrameInSuperview)
     }
-    
-    
 }
 
 extension InjuriesandTraumasInfoViewController: PhotoCellDelegate {
@@ -229,13 +340,54 @@ extension InjuriesandTraumasInfoViewController: AddTourniquetViewDelegate {
         //TODO: - create tourniquet array
         viewModel.addNewTourniquet(tourniquet)
         collectionView.reloadData()
-        
-        
     }
     
     func closeBottonDidTap() {
         addTourniquetView.alpha = 0
     }
-    
-    
+}
+
+extension InjuriesandTraumasInfoViewController {
+    func showOverlay(at cellFrameInSuperview: CGRect) {
+        let overlayView = UIView(frame: view.bounds)
+        overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        overlayView.tag = 998
+        let customSubview = EditView()
+        overlayView.addSubview(customSubview)
+        customSubview.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            customSubview.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: cellFrameInSuperview.minX - 40),
+            customSubview.bottomAnchor.constraint(equalTo: overlayView.bottomAnchor, constant: cellFrameInSuperview.maxY - 60),
+            customSubview.heightAnchor.constraint(equalToConstant: 83),
+            customSubview.widthAnchor.constraint(equalToConstant: 200)
+        ])
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissOverlay(_:)))
+        overlayView.addGestureRecognizer(tapGesture)
+        view.addSubview(overlayView)
+    }
+    @objc
+    private func dismissOverlay(_ sender: UITapGestureRecognizer) {
+        sender.view?.removeFromSuperview()
+    }
+}
+
+
+
+extension InjuriesandTraumasInfoViewController: InjuriesAndTraumasListDetailViewDelegate {
+    func backButtonDidTap() {
+        if let overlayView = view.viewWithTag(999),
+           let customSubview = overlayView.subviews.first(where: { $0 is InjuriesAndTraumasListView }),
+           let subCustomView = overlayView.subviews.last(where: { $0 is InjuriesAndTraumasListDetailView }) as? InjuriesAndTraumasListDetailView {
+           
+            UIView.animate(withDuration: 0.2) {
+                let viewModel = InjuriesAndTraumasListDetailViewModel(type: .percussion)
+                subCustomView.updateViewModel(viewModel: viewModel) // Correctly calling the method
+                subCustomView.alpha = 0
+                UIView.animate(withDuration: 0.2) {
+                    customSubview.alpha = 1
+                }
+            }
+        
+        }
+    }
 }

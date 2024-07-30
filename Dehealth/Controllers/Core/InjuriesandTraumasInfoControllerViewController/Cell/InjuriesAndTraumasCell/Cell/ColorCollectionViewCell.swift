@@ -21,6 +21,6 @@ class ColorCollectionViewCell: UICollectionViewCell {
     }
     //MARK: - Functions
     private func configureUI() {
-        backgroundColor = .blue
+        backgroundColor = .purple
     }
 }

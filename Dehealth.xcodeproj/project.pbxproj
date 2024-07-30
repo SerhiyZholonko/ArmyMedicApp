@@ -41,6 +41,7 @@
 		183762632B7E4FB2006912C6 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183762622B7E4FB2006912C6 /* CustomTextView.swift */; };
 		183762652B7E55FC006912C6 /* EvacuationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183762642B7E55FC006912C6 /* EvacuationCell.swift */; };
 		1847183E2C21AD320028F18A /* CancelSaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1847183D2C21AD320028F18A /* CancelSaveView.swift */; };
+		1847E0782C50D22100B9EC5C /* TwoButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1847E0772C50D22100B9EC5C /* TwoButtonView.swift */; };
 		18492FC02C3BC1BC0012A2BE /* AddTourniquetViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18492FBF2C3BC1BC0012A2BE /* AddTourniquetViewViewModel.swift */; };
 		18492FC32C3BC44F0012A2BE /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18492FC22C3BC44F0012A2BE /* Image.swift */; };
 		18492FC62C3BCE7A0012A2BE /* TimeAndTypeOfTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18492FC52C3BCE7A0012A2BE /* TimeAndTypeOfTrainingView.swift */; };
@@ -53,7 +54,13 @@
 		185654EB2C36E0C800905D99 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185654EA2C36E0C800905D99 /* PhotoCell.swift */; };
 		1858886F2B7F47A900DE4424 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858886E2B7F47A900DE4424 /* SearchCell.swift */; };
 		185888722B7F59F900DE4424 /* CollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185888712B7F59F900DE4424 /* CollectionHeaderView.swift */; };
+		1871E3EA2C4E370200FE5554 /* InjuriesAndTraumasListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1871E3E92C4E370200FE5554 /* InjuriesAndTraumasListView.swift */; };
+		1871E3ED2C4E4E2C00FE5554 /* InjuriesAndTraumasListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1871E3EC2C4E4E2C00FE5554 /* InjuriesAndTraumasListViewModel.swift */; };
+		1871E3F02C4E52E500FE5554 /* InjuriesAndTraumasListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1871E3EF2C4E52E500FE5554 /* InjuriesAndTraumasListCell.swift */; };
+		1871E3F42C4E8D3000FE5554 /* ImageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1871E3F32C4E8D3000FE5554 /* ImageTitleView.swift */; };
 		18789BFC2C109A7C00195397 /* SignsAndSymptomsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18789BFB2C109A7C00195397 /* SignsAndSymptomsCollectionViewCell.swift */; };
+		188015B52C44F72E0011DBB7 /* AbdominalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188015B42C44F72E0011DBB7 /* AbdominalView.swift */; };
+		188015B92C44FC640011DBB7 /* AbdominalPlaceOfOverlapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188015B82C44FC640011DBB7 /* AbdominalPlaceOfOverlapView.swift */; };
 		1883C13D2BF7335A0002887B /* GenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883C13C2BF7335A0002887B /* GenderView.swift */; };
 		18845F922C2E829600D97379 /* Defender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18845F912C2E829600D97379 /* Defender.swift */; };
 		18845F942C2EB18A00D97379 /* AddThePreparationViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18845F932C2EB18A00D97379 /* AddThePreparationViewViewModel.swift */; };
@@ -63,6 +70,10 @@
 		188C967C2B8CC453005B96DE /* InjuriesAndWoundsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188C967B2B8CC453005B96DE /* InjuriesAndWoundsController.swift */; };
 		188C967F2B8CD5F8005B96DE /* InjuriesInjuryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188C967E2B8CD5F8005B96DE /* InjuriesInjuryView.swift */; };
 		188D5D6E2C05FD1200C79B4E /* PreviousActView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188D5D6D2C05FD1200C79B4E /* PreviousActView.swift */; };
+		188DCE0E2C414902000A4807 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188DCE0D2C414902000A4807 /* CustomSegmentedControl.swift */; };
+		188DCE102C414930000A4807 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188DCE0F2C414930000A4807 /* Button.swift */; };
+		188DCE122C415776000A4807 /* NodalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188DCE112C415776000A4807 /* NodalView.swift */; };
+		188DCE152C416188000A4807 /* GroinPlaceOfOverlapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188DCE142C416188000A4807 /* GroinPlaceOfOverlapView.swift */; };
 		1896541F2B395A1200CF0B85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1896541E2B395A1200CF0B85 /* AppDelegate.swift */; };
 		189654212B395A1200CF0B85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189654202B395A1200CF0B85 /* SceneDelegate.swift */; };
 		189654282B395A1300CF0B85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 189654272B395A1300CF0B85 /* Assets.xcassets */; };
@@ -96,6 +107,7 @@
 		189864ED2B8F792400092734 /* WoundingColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189864EC2B8F792400092734 /* WoundingColorView.swift */; };
 		189864EF2B8F7D2A00092734 /* WeaponDropBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189864EE2B8F7D2A00092734 /* WeaponDropBoxView.swift */; };
 		189864F32B8F80A200092734 /* SetWoundingControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189864F22B8F80A200092734 /* SetWoundingControllerViewModel.swift */; };
+		189D49322C492B5E002852F2 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D49312C492B5E002852F2 /* EditView.swift */; };
 		189E96472BFF7EF600C2C350 /* PreliminaryDiagnosisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E96462BFF7EF600C2C350 /* PreliminaryDiagnosisView.swift */; };
 		18A160EC2C07580D00C5612B /* AssistanceProvidedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A160EB2C07580D00C5612B /* AssistanceProvidedController.swift */; };
 		18A160EF2C075F5300C5612B /* AssistanceProvidedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A160EE2C075F5300C5612B /* AssistanceProvidedCell.swift */; };
@@ -112,6 +124,9 @@
 		18AD0B952B3AF10100021F7A /* CustomLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AD0B942B3AF10100021F7A /* CustomLoginButton.swift */; };
 		18AD0B9D2B3AF81C00021F7A /* TestCustomLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AD0B9C2B3AF81C00021F7A /* TestCustomLoginButton.swift */; };
 		18AD0B9F2B3AFC6400021F7A /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AD0B9E2B3AFC6400021F7A /* CircularProgressView.swift */; };
+		18AE5C122C5216D200F24E56 /* InjuriesAndTraumasListDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AE5C112C5216D200F24E56 /* InjuriesAndTraumasListDetailView.swift */; };
+		18AE5C162C52349700F24E56 /* HeaderInjuriesAndTraumasListDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AE5C152C52349700F24E56 /* HeaderInjuriesAndTraumasListDetailView.swift */; };
+		18AE5C3B2C5260FE00F24E56 /* InjuriesAndTraumasListDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AE5C3A2C5260FE00F24E56 /* InjuriesAndTraumasListDetailViewModel.swift */; };
 		18AF045A2BFC9930005BB82F /* AlertSaveChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AF04592BFC9930005BB82F /* AlertSaveChange.swift */; };
 		18B69AFA2C3FE7CF0085E12A /* SpecifyTheExactLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B69AF92C3FE7CF0085E12A /* SpecifyTheExactLocationView.swift */; };
 		18B69AFC2C3FEFC00085E12A /* BigSpecifyTheExactLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B69AFB2C3FEFBF0085E12A /* BigSpecifyTheExactLocationView.swift */; };
@@ -136,7 +151,7 @@
 		18F14B992B889B0E0060E1C3 /* InjuriesAndTraumasCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F14B982B889B0E0060E1C3 /* InjuriesAndTraumasCell.swift */; };
 		18F14B9C2B889BA70060E1C3 /* InjuriesAndTraumasCellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F14B9B2B889BA70060E1C3 /* InjuriesAndTraumasCellHeader.swift */; };
 		18F14B9E2B88C8EB0060E1C3 /* TourniquetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F14B9D2B88C8EB0060E1C3 /* TourniquetCell.swift */; };
-		18F14BA02B88D88F0060E1C3 /* AddColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F14B9F2B88D88F0060E1C3 /* AddColorView.swift */; };
+		18F14BA02B88D88F0060E1C3 /* SelectedMarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F14B9F2B88D88F0060E1C3 /* SelectedMarksView.swift */; };
 		18F14BA42B88D9320060E1C3 /* ColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F14BA32B88D9320060E1C3 /* ColorView.swift */; };
 		18F8D9682C1866A200E09FC6 /* AddThePreparationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8D9672C1866A200E09FC6 /* AddThePreparationView.swift */; };
 		18F8D96A2C1877D000E09FC6 /* TitleTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F8D9692C1877D000E09FC6 /* TitleTextFieldView.swift */; };
@@ -179,6 +194,7 @@
 		183762622B7E4FB2006912C6 /* CustomTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 		183762642B7E55FC006912C6 /* EvacuationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvacuationCell.swift; sourceTree = "<group>"; };
 		1847183D2C21AD320028F18A /* CancelSaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelSaveView.swift; sourceTree = "<group>"; };
+		1847E0772C50D22100B9EC5C /* TwoButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoButtonView.swift; sourceTree = "<group>"; };
 		18492FBF2C3BC1BC0012A2BE /* AddTourniquetViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTourniquetViewViewModel.swift; sourceTree = "<group>"; };
 		18492FC22C3BC44F0012A2BE /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		18492FC52C3BCE7A0012A2BE /* TimeAndTypeOfTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAndTypeOfTrainingView.swift; sourceTree = "<group>"; };
@@ -191,7 +207,13 @@
 		185654EA2C36E0C800905D99 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		1858886E2B7F47A900DE4424 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		185888712B7F59F900DE4424 /* CollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHeaderView.swift; sourceTree = "<group>"; };
+		1871E3E92C4E370200FE5554 /* InjuriesAndTraumasListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjuriesAndTraumasListView.swift; sourceTree = "<group>"; };
+		1871E3EC2C4E4E2C00FE5554 /* InjuriesAndTraumasListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjuriesAndTraumasListViewModel.swift; sourceTree = "<group>"; };
+		1871E3EF2C4E52E500FE5554 /* InjuriesAndTraumasListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjuriesAndTraumasListCell.swift; sourceTree = "<group>"; };
+		1871E3F32C4E8D3000FE5554 /* ImageTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTitleView.swift; sourceTree = "<group>"; };
 		18789BFB2C109A7C00195397 /* SignsAndSymptomsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignsAndSymptomsCollectionViewCell.swift; sourceTree = "<group>"; };
+		188015B42C44F72E0011DBB7 /* AbdominalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbdominalView.swift; sourceTree = "<group>"; };
+		188015B82C44FC640011DBB7 /* AbdominalPlaceOfOverlapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbdominalPlaceOfOverlapView.swift; sourceTree = "<group>"; };
 		1883C13C2BF7335A0002887B /* GenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderView.swift; sourceTree = "<group>"; };
 		18845F912C2E829600D97379 /* Defender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defender.swift; sourceTree = "<group>"; };
 		18845F932C2EB18A00D97379 /* AddThePreparationViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddThePreparationViewViewModel.swift; sourceTree = "<group>"; };
@@ -201,6 +223,10 @@
 		188C967B2B8CC453005B96DE /* InjuriesAndWoundsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjuriesAndWoundsController.swift; sourceTree = "<group>"; };
 		188C967E2B8CD5F8005B96DE /* InjuriesInjuryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjuriesInjuryView.swift; sourceTree = "<group>"; };
 		188D5D6D2C05FD1200C79B4E /* PreviousActView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviousActView.swift; sourceTree = "<group>"; };
+		188DCE0D2C414902000A4807 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
+		188DCE0F2C414930000A4807 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		188DCE112C415776000A4807 /* NodalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodalView.swift; sourceTree = "<group>"; };
+		188DCE142C416188000A4807 /* GroinPlaceOfOverlapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroinPlaceOfOverlapView.swift; sourceTree = "<group>"; };
 		1896541B2B395A1200CF0B85 /* Dehealth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dehealth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1896541E2B395A1200CF0B85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		189654202B395A1200CF0B85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -236,6 +262,7 @@
 		189864EC2B8F792400092734 /* WoundingColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WoundingColorView.swift; sourceTree = "<group>"; };
 		189864EE2B8F7D2A00092734 /* WeaponDropBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponDropBoxView.swift; sourceTree = "<group>"; };
 		189864F22B8F80A200092734 /* SetWoundingControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetWoundingControllerViewModel.swift; sourceTree = "<group>"; };
+		189D49312C492B5E002852F2 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		189E96462BFF7EF600C2C350 /* PreliminaryDiagnosisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreliminaryDiagnosisView.swift; sourceTree = "<group>"; };
 		18A160EB2C07580D00C5612B /* AssistanceProvidedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistanceProvidedController.swift; sourceTree = "<group>"; };
 		18A160EE2C075F5300C5612B /* AssistanceProvidedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistanceProvidedCell.swift; sourceTree = "<group>"; };
@@ -251,6 +278,9 @@
 		18AD0B942B3AF10100021F7A /* CustomLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoginButton.swift; sourceTree = "<group>"; };
 		18AD0B9C2B3AF81C00021F7A /* TestCustomLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCustomLoginButton.swift; sourceTree = "<group>"; };
 		18AD0B9E2B3AFC6400021F7A /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		18AE5C112C5216D200F24E56 /* InjuriesAndTraumasListDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjuriesAndTraumasListDetailView.swift; sourceTree = "<group>"; };
+		18AE5C152C52349700F24E56 /* HeaderInjuriesAndTraumasListDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderInjuriesAndTraumasListDetailView.swift; sourceTree = "<group>"; };
+		18AE5C3A2C5260FE00F24E56 /* InjuriesAndTraumasListDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjuriesAndTraumasListDetailViewModel.swift; sourceTree = "<group>"; };
 		18AF04592BFC9930005BB82F /* AlertSaveChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSaveChange.swift; sourceTree = "<group>"; };
 		18B69AF92C3FE7CF0085E12A /* SpecifyTheExactLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecifyTheExactLocationView.swift; sourceTree = "<group>"; };
 		18B69AFB2C3FEFBF0085E12A /* BigSpecifyTheExactLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigSpecifyTheExactLocationView.swift; sourceTree = "<group>"; };
@@ -275,7 +305,7 @@
 		18F14B982B889B0E0060E1C3 /* InjuriesAndTraumasCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjuriesAndTraumasCell.swift; sourceTree = "<group>"; };
 		18F14B9B2B889BA70060E1C3 /* InjuriesAndTraumasCellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjuriesAndTraumasCellHeader.swift; sourceTree = "<group>"; };
 		18F14B9D2B88C8EB0060E1C3 /* TourniquetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourniquetCell.swift; sourceTree = "<group>"; };
-		18F14B9F2B88D88F0060E1C3 /* AddColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddColorView.swift; sourceTree = "<group>"; };
+		18F14B9F2B88D88F0060E1C3 /* SelectedMarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedMarksView.swift; sourceTree = "<group>"; };
 		18F14BA32B88D9320060E1C3 /* ColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorView.swift; sourceTree = "<group>"; };
 		18F8D9672C1866A200E09FC6 /* AddThePreparationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddThePreparationView.swift; sourceTree = "<group>"; };
 		18F8D9692C1877D000E09FC6 /* TitleTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTextFieldView.swift; sourceTree = "<group>"; };
@@ -332,6 +362,7 @@
 		180C0A702C358C8F006AECC9 /* TourniquetCell */ = {
 			isa = PBXGroup;
 			children = (
+				189D49302C492B04002852F2 /* View */,
 				180C0A712C358C95006AECC9 /* Cell */,
 				18F14B9D2B88C8EB0060E1C3 /* TourniquetCell.swift */,
 			);
@@ -369,12 +400,7 @@
 			isa = PBXGroup;
 			children = (
 				18492FC42C3BC5400012A2BE /* AddTourniquetView */,
-				181431912C3814460004C5C0 /* PlaceOfOverlapView.swift */,
-				18AC0AD82C3D0E6800B0A334 /* TypeOfTurnstileTableView.swift */,
-				181431932C381FBF0004C5C0 /* TypeOfTurnstileView.swift */,
-				18B69AF92C3FE7CF0085E12A /* SpecifyTheExactLocationView.swift */,
-				18B69AFB2C3FEFBF0085E12A /* BigSpecifyTheExactLocationView.swift */,
-				18492FC72C3BD5010012A2BE /* TimeAndTypeOfTrainingView */,
+				188015B72C44F9FC0011DBB7 /* View */,
 			);
 			path = AddTourniquetView;
 			sourceTree = "<group>";
@@ -445,6 +471,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		1847E0992C51176B00B9EC5C /* SetWoundingController */ = {
+			isa = PBXGroup;
+			children = (
+				189864E82B8F703C00092734 /* SetWoundingController.swift */,
+			);
+			path = SetWoundingController;
+			sourceTree = "<group>";
+		};
 		18492FC12C3BC3170012A2BE /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -457,7 +491,6 @@
 		18492FC42C3BC5400012A2BE /* AddTourniquetView */ = {
 			isa = PBXGroup;
 			children = (
-				18492FC12C3BC3170012A2BE /* ViewModel */,
 				1814318E2C37DB580004C5C0 /* AddTourniquetView.swift */,
 			);
 			path = AddTourniquetView;
@@ -488,6 +521,42 @@
 			path = "New Group";
 			sourceTree = "<group>";
 		};
+		1871E3EB2C4E4E1D00FE5554 /* InjuriesAndTraumasListView */ = {
+			isa = PBXGroup;
+			children = (
+				1871E3EE2C4E52C400FE5554 /* Cell */,
+				1871E3E92C4E370200FE5554 /* InjuriesAndTraumasListView.swift */,
+				1871E3EC2C4E4E2C00FE5554 /* InjuriesAndTraumasListViewModel.swift */,
+			);
+			path = InjuriesAndTraumasListView;
+			sourceTree = "<group>";
+		};
+		1871E3EE2C4E52C400FE5554 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				1871E3EF2C4E52E500FE5554 /* InjuriesAndTraumasListCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		1871E3F12C4E8CE500FE5554 /* SetWoundingController */ = {
+			isa = PBXGroup;
+			children = (
+				1871E3F22C4E8D0F00FE5554 /* View */,
+				1847E0992C51176B00B9EC5C /* SetWoundingController */,
+			);
+			path = SetWoundingController;
+			sourceTree = "<group>";
+		};
+		1871E3F22C4E8D0F00FE5554 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1871E3F32C4E8D3000FE5554 /* ImageTitleView.swift */,
+				1847E0772C50D22100B9EC5C /* TwoButtonView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		18789BF92C10982200195397 /* SignsAndSymptomsCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -515,6 +584,31 @@
 				18A22CB62BE0D5AA00E9A890 /* APIManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		188015B62C44F73A0011DBB7 /* AbdominalView */ = {
+			isa = PBXGroup;
+			children = (
+				188015B42C44F72E0011DBB7 /* AbdominalView.swift */,
+				188015B82C44FC640011DBB7 /* AbdominalPlaceOfOverlapView.swift */,
+			);
+			path = AbdominalView;
+			sourceTree = "<group>";
+		};
+		188015B72C44F9FC0011DBB7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				18492FC72C3BD5010012A2BE /* TimeAndTypeOfTrainingView */,
+				18492FC12C3BC3170012A2BE /* ViewModel */,
+				188DCE132C415784000A4807 /* NodalView */,
+				188015B62C44F73A0011DBB7 /* AbdominalView */,
+				181431912C3814460004C5C0 /* PlaceOfOverlapView.swift */,
+				18AC0AD82C3D0E6800B0A334 /* TypeOfTurnstileTableView.swift */,
+				181431932C381FBF0004C5C0 /* TypeOfTurnstileView.swift */,
+				18B69AF92C3FE7CF0085E12A /* SpecifyTheExactLocationView.swift */,
+				18B69AFB2C3FEFBF0085E12A /* BigSpecifyTheExactLocationView.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		1883C13B2BF733280002887B /* GenderView */ = {
@@ -597,6 +691,15 @@
 				189864EE2B8F7D2A00092734 /* WeaponDropBoxView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		188DCE132C415784000A4807 /* NodalView */ = {
+			isa = PBXGroup;
+			children = (
+				188DCE112C415776000A4807 /* NodalView.swift */,
+				188DCE142C416188000A4807 /* GroinPlaceOfOverlapView.swift */,
+			);
+			path = NodalView;
 			sourceTree = "<group>";
 		};
 		189654122B395A1200CF0B85 = {
@@ -697,6 +800,7 @@
 				183762622B7E4FB2006912C6 /* CustomTextView.swift */,
 				180B57E82B91F50800A71AB0 /* ImageLabelView.swift */,
 				180F56C42C0F519A008511D5 /* PaddedLabel.swift */,
+				188DCE0D2C414902000A4807 /* CustomSegmentedControl.swift */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -709,6 +813,7 @@
 				181195252B70DA1B0083ABCE /* Font.swift */,
 				1811952B2B7115730083ABCE /* ViewController.swift */,
 				184F18442C0D9F2300193C6E /* Color.swift */,
+				188DCE0F2C414930000A4807 /* Button.swift */,
 				18492FC22C3BC44F0012A2BE /* Image.swift */,
 			);
 			path = Extensions;
@@ -753,7 +858,7 @@
 			isa = PBXGroup;
 			children = (
 				188C967B2B8CC453005B96DE /* InjuriesAndWoundsController.swift */,
-				189864E82B8F703C00092734 /* SetWoundingController.swift */,
+				1871E3F12C4E8CE500FE5554 /* SetWoundingController */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -767,6 +872,14 @@
 				189864F22B8F80A200092734 /* SetWoundingControllerViewModel.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		189D49302C492B04002852F2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				189D49312C492B5E002852F2 /* EditView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		18A160EA2C0757F000C5612B /* AssistanceProvidedController */ = {
@@ -853,6 +966,24 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		18AE5C132C52346300F24E56 /* InjuriesAndTraumasListDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				18AE5C142C52346D00F24E56 /* View */,
+				18AE5C112C5216D200F24E56 /* InjuriesAndTraumasListDetailView.swift */,
+				18AE5C3A2C5260FE00F24E56 /* InjuriesAndTraumasListDetailViewModel.swift */,
+			);
+			path = InjuriesAndTraumasListDetailView;
+			sourceTree = "<group>";
+		};
+		18AE5C142C52346D00F24E56 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				18AE5C152C52349700F24E56 /* HeaderInjuriesAndTraumasListDetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		18AF04582BFC990D005BB82F /* AlertSaveChange */ = {
 			isa = PBXGroup;
 			children = (
@@ -918,6 +1049,8 @@
 		18C5AC562C342CB500D11253 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				18AE5C132C52346300F24E56 /* InjuriesAndTraumasListDetailView */,
+				1871E3EB2C4E4E1D00FE5554 /* InjuriesAndTraumasListView */,
 				180C0A6A2C35185A006AECC9 /* AddPreliminaryDiagnosisView.swift */,
 				181431902C3814170004C5C0 /* AddTourniquetView */,
 			);
@@ -1031,7 +1164,7 @@
 			isa = PBXGroup;
 			children = (
 				18F14BA22B88D9120060E1C3 /* ColorView */,
-				18F14B9F2B88D88F0060E1C3 /* AddColorView.swift */,
+				18F14B9F2B88D88F0060E1C3 /* SelectedMarksView.swift */,
 			);
 			path = AddColorView;
 			sourceTree = "<group>";
@@ -1134,11 +1267,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				18C5AC552C3423E300D11253 /* ColorCollectionViewCell.swift in Sources */,
+				189D49322C492B5E002852F2 /* EditView.swift in Sources */,
 				18239C2E2B720EF80031CA1B /* SearchByIdView.swift in Sources */,
 				189E96472BFF7EF600C2C350 /* PreliminaryDiagnosisView.swift in Sources */,
 				189864F32B8F80A200092734 /* SetWoundingControllerViewModel.swift in Sources */,
 				180C0A6B2C35185A006AECC9 /* AddPreliminaryDiagnosisView.swift in Sources */,
 				18F8D9682C1866A200E09FC6 /* AddThePreparationView.swift in Sources */,
+				1871E3F42C4E8D3000FE5554 /* ImageTitleView.swift in Sources */,
 				18F14B992B889B0E0060E1C3 /* InjuriesAndTraumasCell.swift in Sources */,
 				18A22CBC2BE0D72A00E9A890 /* SearchViewControllerViewModel.swift in Sources */,
 				180F56C52C0F519A008511D5 /* PaddedLabel.swift in Sources */,
@@ -1148,6 +1283,8 @@
 				18DE59342B7CE7E5008CCE38 /* PointTextView.swift in Sources */,
 				1896544A2B396F2900CF0B85 /* String.swift in Sources */,
 				189654422B395F8100CF0B85 /* CustomImageView.swift in Sources */,
+				1871E3ED2C4E4E2C00FE5554 /* InjuriesAndTraumasListViewModel.swift in Sources */,
+				18AE5C122C5216D200F24E56 /* InjuriesAndTraumasListDetailView.swift in Sources */,
 				18F14B062C1ABF2E00F28FB4 /* CheckTextCell.swift in Sources */,
 				18A479922B74F67B004F7A9D /* MainInfoCell.swift in Sources */,
 				1809DBC72C19CD7700D73768 /* PikerListControlView.swift in Sources */,
@@ -1160,9 +1297,11 @@
 				188C967F2B8CD5F8005B96DE /* InjuriesInjuryView.swift in Sources */,
 				181431922C3814460004C5C0 /* PlaceOfOverlapView.swift in Sources */,
 				188C967C2B8CC453005B96DE /* InjuriesAndWoundsController.swift in Sources */,
+				18AE5C162C52349700F24E56 /* HeaderInjuriesAndTraumasListDetailView.swift in Sources */,
 				18F8D96A2C1877D000E09FC6 /* TitleTextFieldView.swift in Sources */,
 				18DE59322B7CE60E008CCE38 /* SexView.swift in Sources */,
 				189864EB2B8F783900092734 /* ImagesScrollView.swift in Sources */,
+				1871E3F02C4E52E500FE5554 /* InjuriesAndTraumasListCell.swift in Sources */,
 				189864E92B8F703C00092734 /* SetWoundingController.swift in Sources */,
 				18CCB2852C108B3600F5519C /* NoteCollectionViewCell.swift in Sources */,
 				185888722B7F59F900DE4424 /* CollectionHeaderView.swift in Sources */,
@@ -1175,7 +1314,7 @@
 				18492FC62C3BCE7A0012A2BE /* TimeAndTypeOfTrainingView.swift in Sources */,
 				184F18492C0DF0A000193C6E /* SignsAndSymptomsCell.swift in Sources */,
 				1811952E2B711AFC0083ABCE /* InternetConnectionManager.swift in Sources */,
-				18F14BA02B88D88F0060E1C3 /* AddColorView.swift in Sources */,
+				18F14BA02B88D88F0060E1C3 /* SelectedMarksView.swift in Sources */,
 				1813A8522BDFCB0A0019A9DF /* StoreManager.swift in Sources */,
 				18789BFC2C109A7C00195397 /* SignsAndSymptomsCollectionViewCell.swift in Sources */,
 				1811952A2B7106930083ABCE /* NoInternetAlert.swift in Sources */,
@@ -1208,8 +1347,11 @@
 				180C0A732C358CA3006AECC9 /* PlaceOnBodyCollectionViewCell.swift in Sources */,
 				188D5D6E2C05FD1200C79B4E /* PreviousActView.swift in Sources */,
 				189654392B395E1900CF0B85 /* LoginViewController.swift in Sources */,
+				188DCE152C416188000A4807 /* GroinPlaceOfOverlapView.swift in Sources */,
 				181195302B711D2C0083ABCE /* PageNotFound .swift in Sources */,
+				1871E3EA2C4E370200FE5554 /* InjuriesAndTraumasListView.swift in Sources */,
 				18F14B962B888A660060E1C3 /* InjuriesandTraumasInfoViewController.swift in Sources */,
+				188DCE0E2C414902000A4807 /* CustomSegmentedControl.swift in Sources */,
 				189654402B395F7800CF0B85 /* CustomLabel.swift in Sources */,
 				189654352B395BAA00CF0B85 /* MainPageController.swift in Sources */,
 				1896541F2B395A1200CF0B85 /* AppDelegate.swift in Sources */,
@@ -1221,6 +1363,7 @@
 				18DE59362B7D0AD5008CCE38 /* AxialIdentificationCell.swift in Sources */,
 				18845F942C2EB18A00D97379 /* AddThePreparationViewViewModel.swift in Sources */,
 				181643162B97069D0066B000 /* GoogleAuthManager.swift in Sources */,
+				188DCE122C415776000A4807 /* NodalView.swift in Sources */,
 				189864E62B8F52AE00092734 /* InjuriesInjuryTitle.swift in Sources */,
 				189864E12B8F312D00092734 /* WeaponCausedTheInjuryView.swift in Sources */,
 				18492FC32C3BC44F0012A2BE /* Image.swift in Sources */,
@@ -1231,9 +1374,11 @@
 				181FDA122BF4D4C5009338EE /* TokenManager.swift in Sources */,
 				18AD0B9D2B3AF81C00021F7A /* TestCustomLoginButton.swift in Sources */,
 				18A4798D2B74F166004F7A9D /* MainInfoControllerView.swift in Sources */,
+				188015B92C44FC640011DBB7 /* AbdominalPlaceOfOverlapView.swift in Sources */,
 				181195342B7123D40083ABCE /* HeaderMainView.swift in Sources */,
 				18492FCB2C3C05000012A2BE /* TimeTurnstileView.swift in Sources */,
 				1858886F2B7F47A900DE4424 /* SearchCell.swift in Sources */,
+				188015B52C44F72E0011DBB7 /* AbdominalView.swift in Sources */,
 				18C5AC492C32BA8A00D11253 /* AddNoteView.swift in Sources */,
 				18AD0B9F2B3AFC6400021F7A /* CircularProgressView.swift in Sources */,
 				18CCB27F2C105D2B00F5519C /* MedicinesAndDrugsCollectionView.swift in Sources */,
@@ -1244,11 +1389,14 @@
 				18AD0B952B3AF10100021F7A /* CustomLoginButton.swift in Sources */,
 				189654662B39982600CF0B85 /* CustomButton.swift in Sources */,
 				189654212B395A1200CF0B85 /* SceneDelegate.swift in Sources */,
+				1847E0782C50D22100B9EC5C /* TwoButtonView.swift in Sources */,
 				1847183E2C21AD320028F18A /* CancelSaveView.swift in Sources */,
 				18C5AC4C2C32CEA500D11253 /* DeleteAddButtonView.swift in Sources */,
 				18F14B9C2B889BA70060E1C3 /* InjuriesAndTraumasCellHeader.swift in Sources */,
+				188DCE102C414930000A4807 /* Button.swift in Sources */,
 				183762612B7E36CE006912C6 /* PlaceOfCombatOperationsCell.swift in Sources */,
 				18C21DE82B6D2A33002DDCBC /* RecaveryPassword.swift in Sources */,
+				18AE5C3B2C5260FE00F24E56 /* InjuriesAndTraumasListDetailViewModel.swift in Sources */,
 				189864ED2B8F792400092734 /* WoundingColorView.swift in Sources */,
 				18239C332B7257B20031CA1B /* SearchViewController.swift in Sources */,
 			);

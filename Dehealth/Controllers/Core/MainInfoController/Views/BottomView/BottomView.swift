@@ -35,7 +35,7 @@ class BottomView: UIView {
 		fatalError("init(coder:) has not been implemented")
 	}
 	//MARK: - Functions
-    func setIsEnableLeftButton(_ bool: Bool) {
+    func setIsEnableRightButton(_ bool: Bool) {
         nextButton.isEnabled = bool
         if bool {
             nextButton.backgroundColor = .purple400

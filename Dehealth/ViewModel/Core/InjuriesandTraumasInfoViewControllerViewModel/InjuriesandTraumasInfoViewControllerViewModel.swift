@@ -11,23 +11,24 @@ import UIKit
 struct InjuriesandTraumasInfoViewControllerViewModel {
      //MARK: - Properties
     
-    
+    var markedInjuriesandTraumasList: [InjuriesAndTraumasModel] = []
     let colorsSetList: [String] = []
 //var isPreliminaryDiagnosis = false
     var preliminaryDiagnosis: String = ""
-    var colorsSetListIsEmpty: Bool {
-       return colorsSetList.isEmpty
-    }
+   
     var tourniquetList: [Tourniquet] = []
 
     var tourniquetHeight: CGFloat {
         return CGFloat(tourniquetList.count * 103)
     }
-    var isNotDiagnoseOrColorsOfMark: Bool {
-        return preliminaryDiagnosis == "" && colorsSetList.isEmpty
+    var colorsSetListIsEmpty: Bool {
+       return markedInjuriesandTraumasList.isEmpty
+    }
+    var isNotDiagnose: Bool {
+        return preliminaryDiagnosis == ""
     }
     var isColorEmpty: Bool {
-        return colorsSetList.isEmpty
+        return markedInjuriesandTraumasList.isEmpty
     }
      //MARK: - Functions
     

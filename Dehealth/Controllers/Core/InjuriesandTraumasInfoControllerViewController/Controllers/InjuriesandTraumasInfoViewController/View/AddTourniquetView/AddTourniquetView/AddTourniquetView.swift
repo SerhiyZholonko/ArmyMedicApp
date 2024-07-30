@@ -35,75 +35,32 @@ class AddTourniquetView: UIView {
         button.addTarget(self, action: #selector(closeBottonDidTap), for: .touchUpInside)
         return button
     }()
-    private lazy var localBodyPlaceControl: UISegmentedControl = {
-        let items = BodyPlace.allCases.map { $0.title }
-        let sc = UISegmentedControl(items: items)
-
-        // Background color for the entire control
-        sc.backgroundColor = UIColor(white: 0.95, alpha: 1)
-
-        // Selected segment background color
-        sc.selectedSegmentTintColor = UIColor(white: 0.85, alpha: 1)
-        
-        // Text attributes for normal state
-        let normalFont = UIFont.interMedium(size: 10) // Change the size as needed
-        let normalTextAttributes: [NSAttributedString.Key: Any] = [
-            .font: normalFont,
-            .foregroundColor: UIColor.black
-        ]
-        sc.setTitleTextAttributes(normalTextAttributes, for: .normal)
-
-        // Text attributes for selected state
-        let selectedFont = UIFont.interMedium(size: 10) // Change the size as needed
-        let selectedTextAttributes: [NSAttributedString.Key: Any] = [
-            .font: selectedFont,
-            .foregroundColor: UIColor.black
-        ]
-        sc.setTitleTextAttributes(selectedTextAttributes, for: .selected)
-
-        // Make the first segment selected by default
-        sc.selectedSegmentIndex = 0
-
-        // Add target for value change
-        sc.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
-
-        // Additional customization to match the design
-        sc.layer.borderWidth = 1
-        sc.layer.borderColor = UIColor(white: 0.85, alpha: 1).cgColor
-        sc.layer.cornerRadius = 5
-        sc.clipsToBounds = true
-        
-        if #available(iOS 13.0, *) {
-            let unselectedBackground = UIImage(color: UIColor(white: 1, alpha: 1))
-            let selectedBackground = UIImage(color: UIColor(white: 0.85, alpha: 1))
-            
-            sc.setBackgroundImage(unselectedBackground, for: .normal, barMetrics: .default)
-            sc.setBackgroundImage(selectedBackground, for: .selected, barMetrics: .default)
-            sc.setDividerImage(UIImage(color: .clear), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
-        }
-        
-        return sc
-    }()
-
+    private let localBodyPlaceControl = CustomSegmentedControl("Для кінцівок", "Вузловий", "Абдомінальний")
     private lazy var placeOfOverlapView: PlaceOfOverlapView = {
-       let view = PlaceOfOverlapView()
+        let view = PlaceOfOverlapView()
         view.delegate = self
         return view
     }()
     private lazy var typeOfTurnstileView: TypeOfTurnstileView = {
-       let view = TypeOfTurnstileView()
+        let view = TypeOfTurnstileView()
         view.delegate = self
         return view
     }()
-
+    
     private let typeOfTurnstileTableView: UITableView = {
         let tv = UITableView(frame: .zero)
         tv.layer.cornerRadius = 12
         tv.alpha = 0
         return tv
     }()
+    private let nodalTypeOfTurnstileTableView: UITableView = {
+        let tv = UITableView(frame: .zero)
+        tv.layer.cornerRadius = 12
+        tv.alpha = 0
+        return tv
+    }()
     private lazy var typeOfTrainingView: TypeOfTrainingView = {
-       let view = TypeOfTrainingView()
+        let view = TypeOfTrainingView()
         view.delegate = self
         return view
     }()
@@ -114,7 +71,20 @@ class AddTourniquetView: UIView {
         return view
     }()
     private let bigSpecifyTheExactLocationView: BigSpecifyTheExactLocationView = {
-       let view = BigSpecifyTheExactLocationView()
+        let view = BigSpecifyTheExactLocationView()
+        view.alpha = 0
+        return view
+    }()
+    
+    private lazy var nodalView: NodalView = {
+        let view = NodalView(frame: .zero, viewModel: viewModel)
+        view.delegate = self
+        view.alpha = 0
+        return view
+    }()
+    private lazy var abdominalView: AbdominalView = {
+        let view = AbdominalView(frame: .zero, viewModel: viewModel)
+        view.delegate = self
         view.alpha = 0
         return view
     }()
@@ -134,11 +104,16 @@ class AddTourniquetView: UIView {
         configureUI()
         configureTableView()
         addGesture()
+        configureSegmentControl()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     //MARK: - Functions
+    
+    private func configureSegmentControl() {
+        localBodyPlaceControl.delegate = self
+    }
     private func configureUI() {
         backgroundColor = .black700?.withAlphaComponent(0.7)
         addSubview(bgView)
@@ -158,7 +133,7 @@ class AddTourniquetView: UIView {
         
         addSubview(typeOfTurnstileView)
         typeOfTurnstileView.anchor(top: typeOfTrainingView.bottomAnchor, left: typeOfTrainingView.leftAnchor, right: typeOfTrainingView.rightAnchor, paddingTop: 24, height: 76)
-   
+        
         
         addSubview(addButton)
         addButton.anchor(width: 318, height: 48)
@@ -171,6 +146,13 @@ class AddTourniquetView: UIView {
         
         addSubview(bigSpecifyTheExactLocationView)
         bigSpecifyTheExactLocationView.anchor(top: titleLabel.bottomAnchor, left: bgView.leftAnchor, bottom: typeOfTurnstileView.topAnchor, right: bgView.rightAnchor, paddingBottom: 24)
+        
+        addSubview(nodalView)
+        nodalView.anchor(top: localBodyPlaceControl.bottomAnchor, left: bgView.leftAnchor, bottom: addButton.topAnchor, right: bgView.rightAnchor, paddingLeft: 20, paddingRight: 20)
+        addSubview(nodalTypeOfTurnstileTableView)
+        nodalTypeOfTurnstileTableView.anchor(top:  bgView.bottomAnchor, left: typeOfTurnstileTableView.leftAnchor, right: typeOfTurnstileTableView.rightAnchor, paddingTop: -236, height: 280)
+        addSubview(abdominalView)
+        abdominalView.anchor(top: localBodyPlaceControl.bottomAnchor, left: bgView.leftAnchor, bottom: addButton.topAnchor, right: bgView.rightAnchor, paddingLeft: 20, paddingRight: 20)
     }
     private func addGesture() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -182,12 +164,10 @@ class AddTourniquetView: UIView {
         guard let turnstile = viewModel.getTurnstileForSave() else { return }
         delegate?.saveTourniquet(turnstile)
     }
-    
     @objc
     private func dismissKeyboard() {
         endEditing(true)
     }
-    
     @objc
     private func closeBottonDidTap() {
         delegate?.closeBottonDidTap()
@@ -196,7 +176,6 @@ class AddTourniquetView: UIView {
             self?.specifyTheExactLocationView.alpha = 0
         }
     }
-    
     @objc
     private func segmentChanged(_ sender: UISegmentedControl) {
         guard let selectedSegment = BodyPlace(rawValue: sender.selectedSegmentIndex) else {
@@ -207,6 +186,8 @@ class AddTourniquetView: UIView {
             viewModel.state = 0
         case .knotty:
             viewModel.state = 1
+            typeOfTurnstileTableView.reloadData()
+            nodalTypeOfTurnstileTableView.reloadData()
         case .abdominal:
             viewModel.state = 2
         }
@@ -221,8 +202,19 @@ extension AddTourniquetView: PlaceOfOverlapViewDelegate {
 //TODO: - show or hide table view, typeOfTurnstileTableView
 extension AddTourniquetView: TypeOfTurnstileViewDelegate {
     func getTypeOfTurnstile() {
-        viewModel.isTypeOfTurnstile.toggle()
-        typeOfTurnstileTableView.alpha = viewModel.isTypeOfTurnstile ? 1 : 0
+        if nodalTypeOfTurnstileTableView.alpha == 1 {
+            viewModel.isTypeOfTurnstileForLimbs = false
+            viewModel.isTypeOfTurnstileForNodal = true
+            DispatchQueue.main.async { [weak self] in
+                self?.nodalTypeOfTurnstileTableView.alpha =  self?.nodalTypeOfTurnstileTableView.alpha == 0 ? 1 : 0
+            }
+        } else {
+            viewModel.isTypeOfTurnstileForNodal = false
+            viewModel.isTypeOfTurnstileForLimbs = true
+            DispatchQueue.main.async { [weak self] in
+                self?.typeOfTurnstileTableView.alpha = self?.typeOfTurnstileTableView.alpha == 0 ? 1 : 0
+            }
+        }
     }
 }
 
@@ -230,7 +222,6 @@ extension AddTourniquetView: TypeOfTrainingViewDelegate {
     func getTime(_ time: String) {
         viewModel.time = time
     }
-    
     func setMethod(_ method: PikerStage) {
         switch method {
         case .pikedOne:
@@ -244,32 +235,75 @@ extension AddTourniquetView: TypeOfTrainingViewDelegate {
         }
     }
 }
+
 extension AddTourniquetView: UITableViewDelegate, UITableViewDataSource {
     private func configureTableView() {
         typeOfTurnstileTableView.delegate = self
         typeOfTurnstileTableView.dataSource = self
+        nodalTypeOfTurnstileTableView.delegate = self
+        nodalTypeOfTurnstileTableView.dataSource = self
         typeOfTurnstileTableView.register(TypeOfTrainingViewCell.self, forCellReuseIdentifier: TypeOfTrainingViewCell.identifier)
+        nodalTypeOfTurnstileTableView.register(TypeOfTrainingViewCell.self, forCellReuseIdentifier: TypeOfTrainingViewCell.identifier)
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.typeOfTurnstileList.count
+        return viewModel.isTypeOfTurnstileForNodal ? viewModel.typeOfTurnstileListForNodal.count : viewModel.typeOfTurnstileListForLimbs.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TypeOfTrainingViewCell.identifier, for: indexPath) as! TypeOfTrainingViewCell
-        let typeOfTurnstileString = viewModel.typeOfTurnstileList[indexPath.row]
+
+        let typeOfTurnstileString: String
+        if viewModel.isTypeOfTurnstileForNodal {
+            if indexPath.row < viewModel.typeOfTurnstileListForNodal.count {
+                typeOfTurnstileString = viewModel.typeOfTurnstileListForNodal[indexPath.row]
+            } else {
+                // Handle the error, maybe return a default string or log an error
+                return UITableViewCell() // Return an empty cell to avoid crash
+            }
+        } else {
+            if indexPath.row < viewModel.typeOfTurnstileListForLimbs.count {
+                typeOfTurnstileString = viewModel.typeOfTurnstileListForLimbs[indexPath.row]
+            } else {
+                // Handle the error, maybe return a default string or log an error
+                return UITableViewCell() // Return an empty cell to avoid crash
+            }
+        }
+
         cell.setTitle(typeOfTurnstileString)
+        cell.accessoryType = indexPath == viewModel.selectedIndex ? .checkmark : .none
+        cell.tintColor = .black700
         return cell
     }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let typeOfTurnstileString = viewModel.typeOfTurnstileList[indexPath.row]
-        viewModel.getIndex(indexPath)
-        typeOfTurnstileView.setTitle(typeOfTurnstileString)
         getTypeOfTurnstile()
+        let typeOfTurnstileString = viewModel.isTypeOfTurnstileForNodal ? viewModel.typeOfTurnstileListForNodal[indexPath.row] : viewModel.typeOfTurnstileListForLimbs[indexPath.row]
+        
+        viewModel.getIndex(indexPath)
+        viewModel.selectedIndex = indexPath
+        typeOfTurnstileView.setTitle(typeOfTurnstileString)
+        nodalView.setupTypeLabel(typeOfTurnstileString)
+        
+        tableView.reloadData()
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 56
     }
 }
 
+// In your ViewModel
+class ViewModel {
+    var isTypeOfTurnstileForNodal: Bool = false
+    var typeOfTurnstileListForNodal: [String] = []
+    var typeOfTurnstileListForLimbs: [String] = []
+    var selectedIndex: IndexPath?
+
+    func getIndex(_ indexPath: IndexPath) {
+        selectedIndex = indexPath
+    }
+}
 
 extension AddTourniquetView: SpecifyTheExactLocationViewDelegate {
     func changeToBig() {
@@ -277,52 +311,77 @@ extension AddTourniquetView: SpecifyTheExactLocationViewDelegate {
             self?.bigSpecifyTheExactLocationView.alpha = 1
             self?.specifyTheExactLocationView.alpha = 0
             self?.typeOfTrainingView.selectFirstButton()
-
         }
-      
+    }
+}
+extension AddTourniquetView: CustomSegmentedControlDelegate {
+    func segmentControlDidChange(_tag: Int) {
+        typeOfTurnstileTableView.alpha = 0
+        abdominalView.dismissDropView()
+        nodalTypeOfTurnstileTableView.alpha = 0
+        nodalView.alpha = _tag == 1 ? 1 : 0
+        abdominalView.alpha = _tag == 2 ? 1 : 0
+        if _tag == 0 {
+            placeOfOverlapView.updateSegmentedControl()
+            viewModel.updateData()
+            typeOfTrainingView.updateTime()
+            typeOfTurnstileView.updateLabel()
+            viewModel.state = 0
+            typeOfTurnstileTableView.alpha = 0
+        }
+        if _tag == 1 {
+            nodalView.updateData()
+            viewModel.updateData()
+            viewModel.isTypeOfTurnstileForNodal = true
+            nodalTypeOfTurnstileTableView.reloadData()
+            viewModel.state = 1
+            nodalTypeOfTurnstileTableView.alpha = 0
+        }
+        if _tag == 2 {
+            abdominalView.updateSegmentedControl()
+            viewModel.updateData()
+            viewModel.state = 2
+        }
+    }
+}
+extension AddTourniquetView: NodalViewDelegate {
+    func update(_ time: String) {
+        viewModel.time = time
+    }
+    
+    func update(_ limb: Int) {
+        viewModel.limb = limb
+    }
+    
+    func update(viewModel: AddTourniquetViewViewModel) {
+        self.viewModel = viewModel
+        self.viewModel.isTypeOfTurnstileForNodal = nodalTypeOfTurnstileTableView.alpha == 0 ? false : true
+        nodalTypeOfTurnstileTableView.alpha =  self.viewModel.isTypeOfTurnstileForNodal ? 0 : 1
+    }
+    
+    func dismissTableView() {
+        nodalTypeOfTurnstileTableView.alpha =  nodalTypeOfTurnstileTableView.alpha == 0 ? 1 : 0
+        viewModel.isTypeOfTurnstileForNodal = nodalTypeOfTurnstileTableView.alpha == 0 ? false : true
     }
 }
 
 
-//extension UIImage {
-//    static func imageWithColor(color: UIColor, size: CGSize, cornerRadius: CGFloat) -> UIImage {
-//        let rect = CGRect(origin: .zero, size: size)
-//        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
-//        let context = UIGraphicsGetCurrentContext()!
-//        context.setFillColor(color.cgColor)
-//        let path = UIBezierPath(roundedRect: rect, cornerRadius: cornerRadius)
-//        context.addPath(path.cgPath)
-//        context.fillPath()
-//        let image = UIGraphicsGetImageFromCurrentImageContext()!
-//        UIGraphicsEndImageContext()
-//        return image
-//    }
-//}
-
-
-extension UIImage {
-    convenience init(color: UIColor) {
-        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext()
-        context!.setFillColor(color.cgColor)
-        context!.fill(rect)
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        self.init(cgImage: img!.cgImage!)
+extension AddTourniquetView: AbdominalViewDelegate {
+    func updateType(_ type: Int, state: Int) {
+        viewModel.type = type
+        viewModel.state = state
     }
     
-    func withRoundedCorners(radius: CGFloat) -> UIImage {
-        let rect = CGRect(origin: .zero, size: size)
-        UIGraphicsBeginImageContextWithOptions(size, false, scale)
-        let context = UIGraphicsGetCurrentContext()
-        context?.beginPath()
-        context?.addPath(UIBezierPath(roundedRect: rect, cornerRadius: radius).cgPath)
-        context?.closePath()
-        context?.clip()
-        draw(in: rect)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image ?? self
+    func typeTurnstile(_ turnstile: String) {
+        viewModel.typeOfTurnstile = turnstile
+    }
+    
+    func updateTime(_ time: String) {
+        viewModel.time = time
+    }
+    
+    func updateLimb(_ limb: Int) {
+        viewModel.limb = limb
+        
     }
 }

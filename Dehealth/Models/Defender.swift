@@ -95,7 +95,7 @@ struct Tourniquet: Codable {
     let releasedAt: String // Use Date if needed
 }
 
-enum StateSegment: Int, CaseIterable {
+enum StateSegment1: Int, CaseIterable {
     case leftHand = 0
     case rightHand
     case leftLeg
@@ -107,6 +107,29 @@ enum StateSegment: Int, CaseIterable {
         case .rightHand: return "Права рука"
         case .leftLeg: return "Ліва нога"
         case .rightLeg: return "Права нога"
+        }
+    }
+}
+enum StateSegment2: Int, CaseIterable {
+    case leftHand = 0
+    case rightHand
+    case leftAnrRight
+    
+    var title: String {
+        switch self {
+        case .leftHand: return "Ліва"
+        case .rightHand: return "Права"
+        case .leftAnrRight: return "Ліва та права"
+        }
+    }
+}
+enum StateSegment3: Int, CaseIterable {
+    case leftHand = 0
+  
+    
+    var title: String {
+        switch self {
+        case .leftHand: return "Живіт"
         }
     }
 }
@@ -123,7 +146,7 @@ enum BodyPlace: Int, CaseIterable {
         }
     }
 }
-enum TourniquetType: Int, CaseIterable {
+enum TourniquetTypeState1: Int, CaseIterable {
     case cat7 = 0
     case soft
     case samxt
@@ -143,6 +166,44 @@ enum TourniquetType: Int, CaseIterable {
         case .custom: return "Вказати свій варіант"
         }
     }
+  
+  
+}
+enum TourniquetTypeState3: Int, CaseIterable {
+    case aajtS = 0
+    case croC
+    case custom
+    
+    var title: String {
+        switch self {
+        case .aajtS: return "AAJT-S"
+        case .croC: return "CRoC"
+        case .custom: return "Вказати свій варіант"
+        }
+    }
+  
+  
+}
+
+enum TourniquetTypeState2: Int, CaseIterable {
+    case samJt = 0
+    case aajtS
+    case cRoc
+    case jett
+    case custom
+    
+    var title: String {
+        switch self {
+        case .samJt: return "SAM JT"
+        case .aajtS: return "AAJT-S"
+        case .cRoc: return "CRoC"
+        case .jett: return "JETT"
+        case .custom: return "Вказати свій варіант"
+       
+        }
+    }
+  
+  
 }
 struct HealthCheck: Codable {
     let madeAt: String // Use Date if needed

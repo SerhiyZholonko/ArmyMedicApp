@@ -179,7 +179,7 @@ class InjuriesAndWoundsController: UIViewController {
 	}()
 	
 	
-	 //MARK: -
+	 //MARK: - init
 	private lazy var detailCategoryView: WeaponCausedTheInjuryView = {
 		let view = WeaponCausedTheInjuryView()
 		view.delegate = self
@@ -219,8 +219,6 @@ class InjuriesAndWoundsController: UIViewController {
 	
 }
 
-
-
 extension InjuriesAndWoundsController: InjuriesInjuryViewDelegate {
 	func didTapOnInjuriesView(_ view: InjuriesInjuryView) {
 		guard let type = view.getTypeInjury() else { return }
@@ -244,9 +242,6 @@ extension InjuriesAndWoundsController: InjuriesInjuryViewDelegate {
 			self?.detailCategoryView.alpha = 1
 		}
 	}
-	
-	
-	
 }
 
 
@@ -255,10 +250,10 @@ extension InjuriesAndWoundsController: InjuriesInjuryViewDelegate {
 
 extension InjuriesAndWoundsController: WeaponCausedTheInjuryViewDelegate {
 	func presentVC(weapontype: WeaponCausedTheInjuryTitle, injuriesInjuryType: InjuriesInjuryTitle) {
-		let vc = SetWoundingController(viewModel: SetWoundingControllerViewModel(typeInjuries: injuriesInjuryType, typeWounding: weapontype))
-		vc.modalPresentationStyle = .fullScreen
-		vc.modalTransitionStyle = .crossDissolve
-		self.present(vc, animated: true)
+//		let vc = SetWoundingController(viewModel: SetWoundingControllerViewModel(typeInjuries: injuriesInjuryType, typeWounding: weapontype))
+//		vc.modalPresentationStyle = .fullScreen
+//		vc.modalTransitionStyle = .crossDissolve
+//		self.present(vc, animated: true)
 	}
 	
 	
