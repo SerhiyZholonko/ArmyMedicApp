@@ -24,7 +24,7 @@ class PreviousActView: UICollectionReusableView {
     }()
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Попередній діагноз"
+        label.text = "Коментар"
         label.font = .systemFont(ofSize: 14, weight: .medium)
         label.setWidth(200)
         return label
@@ -50,10 +50,23 @@ class PreviousActView: UICollectionReusableView {
     private func configureUI() {
         addSubview(plusImageView)
         addSubview(titleLabel)
-        plusImageView.anchor(left: leftAnchor, bottom: bottomAnchor, paddingLeft: 115, paddingBottom: 20)
-        titleLabel.centerY(inView: plusImageView, leftAnchor: plusImageView.rightAnchor, paddingLeft: 5)
+        
+        plusImageView.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Calculate total width needed for centering
+        let totalWidth = plusImageView.intrinsicContentSize.width + 5 + titleLabel.intrinsicContentSize.width
+        
+        // Center the plusImageView and titleLabel horizontally
+        NSLayoutConstraint.activate([
+            plusImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            plusImageView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: -totalWidth / 2 + plusImageView.intrinsicContentSize.width / 2),
+            
+            titleLabel.centerYAnchor.constraint(equalTo: plusImageView.centerYAnchor),
+            titleLabel.leftAnchor.constraint(equalTo: plusImageView.rightAnchor, constant: 5)
+        ])
     }
-    
+
     @objc private func plusImageViewDidTap() {
         delegate?.plusImageViewDidTap()
     }

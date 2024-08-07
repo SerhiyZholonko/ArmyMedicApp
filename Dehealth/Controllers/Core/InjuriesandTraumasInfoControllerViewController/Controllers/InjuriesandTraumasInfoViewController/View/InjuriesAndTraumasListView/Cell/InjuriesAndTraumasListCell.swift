@@ -38,7 +38,7 @@ class InjuriesAndTraumasListCell: UICollectionViewCell {
     }
     //MARK: - Properties
     func configureCell(_ model: InjuriesAndTraumasModel) {
-        injuriesAndTraumasImageView.image = UIImage(named: model.imageName)
+        injuriesAndTraumasImageView.image = UIImage(named: model.imageName.rawValue)
         injuriesAndTraumasLabel.text = model.title
         if model.typeOfTransition == .withSection {
             nextArrowImageView.alpha = 1

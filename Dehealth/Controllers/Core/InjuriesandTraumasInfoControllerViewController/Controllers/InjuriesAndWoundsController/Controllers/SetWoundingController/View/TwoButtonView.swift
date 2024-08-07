@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol TwoButtonViewDelegate: AnyObject {
+    func backButtonDidTap()
+}
+
 class TwoButtonView: UIView {
      //MARK: - Properties
-    private let backButton:UIButton = {
+    weak var delegate: TwoButtonViewDelegate?
+    private lazy var backButton:UIButton = {
         let button = UIButton(type: .system)
         let image = UIImage(named: "arrow-go-back-left")
         button.setImage(image, for: .normal)
@@ -17,6 +22,7 @@ class TwoButtonView: UIView {
         button.layer.borderColor = UIColor.black200!.cgColor
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 6
+        button.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
         return button
     }()
     private let nextButton:UIButton = {
@@ -39,6 +45,13 @@ class TwoButtonView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     //MARK: - Functions
+    func backButtonIsActive(isActive: Bool) {
+        if isActive {
+            backButton.tintColor = .black700
+        } else {
+            backButton.tintColor = .black400
+        }
+    }
     private func configureUI() {
         addSubview(backButton)
         backButton.centerY(inView: self, leftAnchor: leftAnchor)
@@ -47,5 +60,8 @@ class TwoButtonView: UIView {
         nextButton.centerY(inView: backButton, leftAnchor: backButton.rightAnchor)
         nextButton.anchor( width: 40, height: 32)
     }
-    
+    @objc
+    private func backButtonDidTap() {
+        delegate?.backButtonDidTap()
+    }
 }

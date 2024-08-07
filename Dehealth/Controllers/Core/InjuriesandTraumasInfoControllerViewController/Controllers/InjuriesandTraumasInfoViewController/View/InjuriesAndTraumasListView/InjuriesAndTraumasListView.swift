@@ -16,8 +16,9 @@ protocol InjuriesAndTraumasListViewDelegate: AnyObject {
 
 class InjuriesAndTraumasListView: UIView {
     // MARK: - Properties
+    
     weak var delegate: InjuriesAndTraumasListViewDelegate?
-    private var viewModel = InjuriesAndTraumasListViewModel()
+    private var viewModel: InjuriesAndTraumasListViewModel
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -29,7 +30,8 @@ class InjuriesAndTraumasListView: UIView {
     }()
     
     // MARK: - Init
-    override init(frame: CGRect) {
+     init(frame: CGRect, viewModel: InjuriesAndTraumasListViewModel) {
+         self.viewModel = viewModel
         super.init(frame: frame)
         configureUI()
         configureCollectionView()
@@ -84,9 +86,12 @@ extension InjuriesAndTraumasListView: UICollectionViewDelegate, UICollectionView
         let model = viewModel.injuriesAndTraumasList[indexPath.item]
         switch model.typeOfTransition {
         case .withSection:
+            
             delegate?.setCustomSubviewAlpha(to: 1, model: model)
         case .burns:
-            delegate?.presentVCForAddInjuries(model)
+           // delegate?.presentVCForAddInjuries(model)
+            print("burns")
+//            break
         case .headInjury:
             delegate?.setCustomSubviewAlpha(to: 1, model: model)
         case .marksWithTheHelpOfGesture:

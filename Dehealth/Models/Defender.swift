@@ -67,14 +67,70 @@ struct File: Codable {
     let type: Int
 }
 
-struct Wound: Codable {
+//struct Wound: Codable {
+//    let isOnBackSide: Bool
+//    let x: Int
+//    let y: Int
+//    let type: Int
+//    let weaponType: Int
+//}
+//struct Wound: Codable {
+//    let isOnBackSide: Bool
+//    let x: Int
+//    let y: Int
+//    let type: Int
+//    let weaponType: Int
+//
+//    // Function to retrieve the corresponding InjuriesAndTraumasModel
+//    func getInjuriesAndTraumasModel() -> InjuriesAndTraumasModel? {
+//        guard let imageName = ImageName.from(type: type) else {
+//            return nil
+//        }
+//
+//        // Provide a default WhatPicture and TypeOfTransition if needed
+//        let defaultWhatPicture: WhatPicture? = nil
+//        let defaultTypeOfTransition = TypeOfTransition.someDefault // Replace with an actual default
+//
+//        return InjuriesAndTraumasModel(
+//            whatPicture: defaultWhatPicture,
+//            imageName: imageName,
+//            title: imageName.title,
+//            typeOfTransition: defaultTypeOfTransition
+//        )
+//    }
+//}
+struct Wound: Codable, Equatable {
     let isOnBackSide: Bool
     let x: Int
     let y: Int
     let type: Int
     let weaponType: Int
-}
 
+ 
+    func getInjuriesAndTraumasModel() -> InjuriesAndTraumasModel? {
+        guard let imageName = ImageName.from(type: type) else {
+            return nil
+        }
+
+        let defaultWhatPicture: WhatPicture? = nil
+        let defaultTypeOfTransition = TypeOfTransition.none
+
+        return InjuriesAndTraumasModel(
+            whatPicture: defaultWhatPicture,
+            imageName: imageName,
+            title: imageName.title,
+            typeOfTransition: defaultTypeOfTransition
+        )
+    }
+
+    static func == (lhs: Wound, rhs: Wound) -> Bool {
+        return lhs.x == rhs.x &&
+               lhs.y == rhs.y &&
+               lhs.type == rhs.type &&
+               lhs.isOnBackSide == rhs.isOnBackSide &&
+               lhs.weaponType == rhs.weaponType
+    }
+}
 struct Trauma: Codable {
     let isOnBackSide: Bool
     let x: Int

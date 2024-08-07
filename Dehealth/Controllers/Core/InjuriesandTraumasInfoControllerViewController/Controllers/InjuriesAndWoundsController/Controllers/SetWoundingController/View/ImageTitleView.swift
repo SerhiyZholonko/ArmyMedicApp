@@ -30,7 +30,7 @@ class ImageTitleView: UIView {
     }
     //MARK: - Functions
     func setTitle(_ model: InjuriesAndTraumasModel) {
-        customImageView.image = UIImage(named: model.imageName)
+        customImageView.image = UIImage(named: model.imageName.rawValue)
         customTitleLabel.text = model.title
     }
     private func configureUI() {

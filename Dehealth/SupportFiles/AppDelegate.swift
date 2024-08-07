@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					 restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
 		if userActivity.activityType == NSUserActivityTypeBrowsingWeb, let url = userActivity.webpageURL {
 			// Handle the URL appropriately within your app
-			print("Received a Universal Link: \(url)")
 		}
 		return true
 	}

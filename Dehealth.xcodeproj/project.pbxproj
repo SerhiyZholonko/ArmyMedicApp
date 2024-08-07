@@ -58,7 +58,9 @@
 		1871E3ED2C4E4E2C00FE5554 /* InjuriesAndTraumasListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1871E3EC2C4E4E2C00FE5554 /* InjuriesAndTraumasListViewModel.swift */; };
 		1871E3F02C4E52E500FE5554 /* InjuriesAndTraumasListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1871E3EF2C4E52E500FE5554 /* InjuriesAndTraumasListCell.swift */; };
 		1871E3F42C4E8D3000FE5554 /* ImageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1871E3F32C4E8D3000FE5554 /* ImageTitleView.swift */; };
+		1874F51A2C5CCCAF00938C93 /* SetWoundingControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1874F5192C5CCCAF00938C93 /* SetWoundingControllerViewModel.swift */; };
 		18789BFC2C109A7C00195397 /* SignsAndSymptomsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18789BFB2C109A7C00195397 /* SignsAndSymptomsCollectionViewCell.swift */; };
+		187ADF152C58D86F00BDACA1 /* TypeInjuryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187ADF142C58D86F00BDACA1 /* TypeInjuryCell.swift */; };
 		188015B52C44F72E0011DBB7 /* AbdominalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188015B42C44F72E0011DBB7 /* AbdominalView.swift */; };
 		188015B92C44FC640011DBB7 /* AbdominalPlaceOfOverlapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188015B82C44FC640011DBB7 /* AbdominalPlaceOfOverlapView.swift */; };
 		1883C13D2BF7335A0002887B /* GenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1883C13C2BF7335A0002887B /* GenderView.swift */; };
@@ -74,6 +76,7 @@
 		188DCE102C414930000A4807 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188DCE0F2C414930000A4807 /* Button.swift */; };
 		188DCE122C415776000A4807 /* NodalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188DCE112C415776000A4807 /* NodalView.swift */; };
 		188DCE152C416188000A4807 /* GroinPlaceOfOverlapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188DCE142C416188000A4807 /* GroinPlaceOfOverlapView.swift */; };
+		1892EF722C60A36D00DAEAB0 /* MiniImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1892EF712C60A36D00DAEAB0 /* MiniImageViewModel.swift */; };
 		1896541F2B395A1200CF0B85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1896541E2B395A1200CF0B85 /* AppDelegate.swift */; };
 		189654212B395A1200CF0B85 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189654202B395A1200CF0B85 /* SceneDelegate.swift */; };
 		189654282B395A1300CF0B85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 189654272B395A1300CF0B85 /* Assets.xcassets */; };
@@ -106,7 +109,6 @@
 		189864EB2B8F783900092734 /* ImagesScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189864EA2B8F783900092734 /* ImagesScrollView.swift */; };
 		189864ED2B8F792400092734 /* WoundingColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189864EC2B8F792400092734 /* WoundingColorView.swift */; };
 		189864EF2B8F7D2A00092734 /* WeaponDropBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189864EE2B8F7D2A00092734 /* WeaponDropBoxView.swift */; };
-		189864F32B8F80A200092734 /* SetWoundingControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189864F22B8F80A200092734 /* SetWoundingControllerViewModel.swift */; };
 		189D49322C492B5E002852F2 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189D49312C492B5E002852F2 /* EditView.swift */; };
 		189E96472BFF7EF600C2C350 /* PreliminaryDiagnosisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E96462BFF7EF600C2C350 /* PreliminaryDiagnosisView.swift */; };
 		18A160EC2C07580D00C5612B /* AssistanceProvidedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A160EB2C07580D00C5612B /* AssistanceProvidedController.swift */; };
@@ -130,7 +132,6 @@
 		18AF045A2BFC9930005BB82F /* AlertSaveChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AF04592BFC9930005BB82F /* AlertSaveChange.swift */; };
 		18B69AFA2C3FE7CF0085E12A /* SpecifyTheExactLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B69AF92C3FE7CF0085E12A /* SpecifyTheExactLocationView.swift */; };
 		18B69AFC2C3FEFC00085E12A /* BigSpecifyTheExactLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B69AFB2C3FEFBF0085E12A /* BigSpecifyTheExactLocationView.swift */; };
-		18C21DE52B6D0AA7002DDCBC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18C21DE42B6D0AA7002DDCBC /* GoogleService-Info.plist */; };
 		18C21DE82B6D2A33002DDCBC /* RecaveryPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C21DE72B6D2A33002DDCBC /* RecaveryPassword.swift */; };
 		18C5AC492C32BA8A00D11253 /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C5AC482C32BA8A00D11253 /* AddNoteView.swift */; };
 		18C5AC4C2C32CEA500D11253 /* DeleteAddButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C5AC4B2C32CEA500D11253 /* DeleteAddButtonView.swift */; };
@@ -211,7 +212,9 @@
 		1871E3EC2C4E4E2C00FE5554 /* InjuriesAndTraumasListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjuriesAndTraumasListViewModel.swift; sourceTree = "<group>"; };
 		1871E3EF2C4E52E500FE5554 /* InjuriesAndTraumasListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjuriesAndTraumasListCell.swift; sourceTree = "<group>"; };
 		1871E3F32C4E8D3000FE5554 /* ImageTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTitleView.swift; sourceTree = "<group>"; };
+		1874F5192C5CCCAF00938C93 /* SetWoundingControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetWoundingControllerViewModel.swift; sourceTree = "<group>"; };
 		18789BFB2C109A7C00195397 /* SignsAndSymptomsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignsAndSymptomsCollectionViewCell.swift; sourceTree = "<group>"; };
+		187ADF142C58D86F00BDACA1 /* TypeInjuryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeInjuryCell.swift; sourceTree = "<group>"; };
 		188015B42C44F72E0011DBB7 /* AbdominalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbdominalView.swift; sourceTree = "<group>"; };
 		188015B82C44FC640011DBB7 /* AbdominalPlaceOfOverlapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbdominalPlaceOfOverlapView.swift; sourceTree = "<group>"; };
 		1883C13C2BF7335A0002887B /* GenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderView.swift; sourceTree = "<group>"; };
@@ -227,6 +230,7 @@
 		188DCE0F2C414930000A4807 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		188DCE112C415776000A4807 /* NodalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodalView.swift; sourceTree = "<group>"; };
 		188DCE142C416188000A4807 /* GroinPlaceOfOverlapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroinPlaceOfOverlapView.swift; sourceTree = "<group>"; };
+		1892EF712C60A36D00DAEAB0 /* MiniImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniImageViewModel.swift; sourceTree = "<group>"; };
 		1896541B2B395A1200CF0B85 /* Dehealth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dehealth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1896541E2B395A1200CF0B85 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		189654202B395A1200CF0B85 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -348,6 +352,7 @@
 				18A22CB82BE0D5D100E9A890 /* DefenderModel.swift */,
 				184F18462C0DB0DD00193C6E /* TextStyle.swift */,
 				18845F912C2E829600D97379 /* Defender.swift */,
+				1892EF712C60A36D00DAEAB0 /* MiniImageViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -475,6 +480,7 @@
 			isa = PBXGroup;
 			children = (
 				189864E82B8F703C00092734 /* SetWoundingController.swift */,
+				1874F5192C5CCCAF00938C93 /* SetWoundingControllerViewModel.swift */,
 			);
 			path = SetWoundingController;
 			sourceTree = "<group>";
@@ -584,6 +590,23 @@
 				18A22CB62BE0D5AA00E9A890 /* APIManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		187ADF122C58D7F100BDACA1 /* ColorCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				187ADF132C58D7F600BDACA1 /* Cell */,
+				18C5AC542C3423E300D11253 /* ColorCollectionViewCell.swift */,
+			);
+			path = ColorCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		187ADF132C58D7F600BDACA1 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				187ADF142C58D86F00BDACA1 /* TypeInjuryCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		188015B62C44F73A0011DBB7 /* AbdominalView */ = {
@@ -1041,7 +1064,7 @@
 			isa = PBXGroup;
 			children = (
 				18C5AC522C341FE900D11253 /* PreliminaryDiagnosisCollectionViewCell.swift */,
-				18C5AC542C3423E300D11253 /* ColorCollectionViewCell.swift */,
+				187ADF122C58D7F100BDACA1 /* ColorCollectionViewCell */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1243,7 +1266,6 @@
 			files = (
 				189654622B397EE800CF0B85 /* Inter-SemiBold.ttf in Resources */,
 				1896545B2B397EE800CF0B85 /* Inter-Light.ttf in Resources */,
-				18C21DE52B6D0AA7002DDCBC /* GoogleService-Info.plist in Resources */,
 				189654602B397EE800CF0B85 /* Inter-ExtraLight.ttf in Resources */,
 				1896545A2B397EE800CF0B85 /* Inter-Medium.ttf in Resources */,
 				1896545F2B397EE800CF0B85 /* Inter-ExtraBold.ttf in Resources */,
@@ -1270,7 +1292,7 @@
 				189D49322C492B5E002852F2 /* EditView.swift in Sources */,
 				18239C2E2B720EF80031CA1B /* SearchByIdView.swift in Sources */,
 				189E96472BFF7EF600C2C350 /* PreliminaryDiagnosisView.swift in Sources */,
-				189864F32B8F80A200092734 /* SetWoundingControllerViewModel.swift in Sources */,
+				187ADF152C58D86F00BDACA1 /* TypeInjuryCell.swift in Sources */,
 				180C0A6B2C35185A006AECC9 /* AddPreliminaryDiagnosisView.swift in Sources */,
 				18F8D9682C1866A200E09FC6 /* AddThePreparationView.swift in Sources */,
 				1871E3F42C4E8D3000FE5554 /* ImageTitleView.swift in Sources */,
@@ -1305,6 +1327,7 @@
 				189864E92B8F703C00092734 /* SetWoundingController.swift in Sources */,
 				18CCB2852C108B3600F5519C /* NoteCollectionViewCell.swift in Sources */,
 				185888722B7F59F900DE4424 /* CollectionHeaderView.swift in Sources */,
+				1892EF722C60A36D00DAEAB0 /* MiniImageViewModel.swift in Sources */,
 				18CCB2832C10707F00F5519C /* MedicinesAndDrugsCollectionViewCell.swift in Sources */,
 				1896543E2B395F7000CF0B85 /* CustomViewText.swift in Sources */,
 				18AC0AD92C3D0E6800B0A334 /* TypeOfTurnstileTableView.swift in Sources */,
@@ -1312,6 +1335,7 @@
 				18B69AFA2C3FE7CF0085E12A /* SpecifyTheExactLocationView.swift in Sources */,
 				180A28542B7DF42000A17C3F /* ImagePickerButton.swift in Sources */,
 				18492FC62C3BCE7A0012A2BE /* TimeAndTypeOfTrainingView.swift in Sources */,
+				1874F51A2C5CCCAF00938C93 /* SetWoundingControllerViewModel.swift in Sources */,
 				184F18492C0DF0A000193C6E /* SignsAndSymptomsCell.swift in Sources */,
 				1811952E2B711AFC0083ABCE /* InternetConnectionManager.swift in Sources */,
 				18F14BA02B88D88F0060E1C3 /* SelectedMarksView.swift in Sources */,

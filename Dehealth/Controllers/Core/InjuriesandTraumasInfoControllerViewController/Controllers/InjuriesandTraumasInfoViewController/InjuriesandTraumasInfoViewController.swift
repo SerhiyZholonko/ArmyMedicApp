@@ -92,6 +92,7 @@ class InjuriesandTraumasInfoViewController: UIViewController {
         view.addSubview(addTourniquetView)
         addTourniquetView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
 	}
+  
 }
 
 
@@ -126,6 +127,7 @@ extension InjuriesandTraumasInfoViewController: UICollectionViewDelegate, UIColl
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		if indexPath.section == 0 && indexPath.row == 0 {
 			let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InjuriesAndTraumasCell.identifier, for: indexPath) as! InjuriesAndTraumasCell
+            
             cell.configureCell(viewModel: viewModel)
 			cell.delegate = self
 			return cell
@@ -158,7 +160,25 @@ extension InjuriesandTraumasInfoViewController: UICollectionViewDelegate, UIColl
 }
 //MARK: - Add InjuriesandTraumas list view
  //MARK: - extension delegate
+
+//MARK: - Remove item from color view
+
 extension InjuriesandTraumasInfoViewController: InjuriesAndTraumasCellDelegate, UIGestureRecognizerDelegate {
+    func deleteItemFromColorList(model: InjuriesAndTraumasModel) {
+       //TODO: - Remove item from color view
+        viewModel.deleteItemFromColorList(model: model)
+        
+        collectionView.reloadData()
+    }
+   
+    func getInjuriesAndTraumasModel(model: InjuriesAndTraumasModel) {
+        let vc = SetWoundingController()
+        vc.delegate = self
+        vc.setupModel(model, woundList: viewModel.woundList)
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+    
     func showInjuryList(on cell: InjuriesAndTraumasCell) {
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
 
@@ -167,11 +187,11 @@ extension InjuriesandTraumasInfoViewController: InjuriesAndTraumasCellDelegate, 
 
         let overlayView = UIView(frame: view.bounds)
         overlayView.tag = 999
-        let injuriesAndTraumasListView = InjuriesAndTraumasListView()
+        
+        let injuriesAndTraumasListView = InjuriesAndTraumasListView(frame: .zero, viewModel: InjuriesAndTraumasListViewModel(selectedInjuriesAndTraumasList: viewModel.markedInjuriesandTraumasList))
         injuriesAndTraumasListView.delegate = self // Set delegate here
         overlayView.addSubview(injuriesAndTraumasListView)
-        
-        //TODO: - extra view 
+        //TODO: - extra view
         let injuriesAndTraumasListDetailView = InjuriesAndTraumasListDetailView()
         injuriesAndTraumasListDetailView.delegate = self
         overlayView.addSubview(injuriesAndTraumasListDetailView) // Add subCustomView to customSubview
@@ -181,11 +201,12 @@ extension InjuriesandTraumasInfoViewController: InjuriesAndTraumasCellDelegate, 
 
         let height = viewModel.calculateHeight(width: collectionView.frame.width)
         let adjustedTopConstant = cellFrameInSuperview.maxY - (325 + height + 40 - (viewModel.isNotDiagnose ? 40 : 25) - (viewModel.isColorEmpty ? 0 : -65))
-        
+        //for cells that are used
+        let sizeUsedCell = viewModel.markedInjuriesandTraumasList.count * 48
         NSLayoutConstraint.activate([
             injuriesAndTraumasListView.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: cellFrameInSuperview.minX - 32),
             injuriesAndTraumasListView.topAnchor.constraint(equalTo: overlayView.topAnchor, constant: adjustedTopConstant),
-            injuriesAndTraumasListView.heightAnchor.constraint(equalToConstant: 384),
+            injuriesAndTraumasListView.heightAnchor.constraint(equalToConstant: CGFloat(384 - sizeUsedCell)),
             injuriesAndTraumasListView.widthAnchor.constraint(equalToConstant: 220),
             
             injuriesAndTraumasListDetailView.trailingAnchor.constraint(equalTo: overlayView.trailingAnchor, constant: cellFrameInSuperview.minX - 32),
@@ -214,7 +235,6 @@ extension InjuriesandTraumasInfoViewController: InjuriesAndTraumasCellDelegate, 
                 }
         }
     }
-
        // UIGestureRecognizerDelegate method
        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
            if let view = gestureRecognizer.view, let customSubview = view.subviews.first(where: { $0 is InjuriesAndTraumasListView }) {
@@ -260,10 +280,17 @@ extension InjuriesandTraumasInfoViewController: InjuriesAndTraumasListViewDelega
                 switch model.typeOfTransition {
                     
                 case .withSection:
-                    let viewModel = InjuriesAndTraumasListDetailViewModel(type: .percussion)
-                    subCustomView.updateViewModel(viewModel: viewModel) // Correctly calling the method
-                    subCustomView.alpha = 1
-                    customSubview.alpha = 0
+                    if model.imageName == .poisoning {
+                        let viewModel = InjuriesAndTraumasListDetailViewModel(type: .poisoning)
+                        subCustomView.updateViewModel(viewModel: viewModel) // Correctly calling the method
+                        subCustomView.alpha = 1
+                        customSubview.alpha = 0
+                    } else {
+                        let viewModel = InjuriesAndTraumasListDetailViewModel(type: .percussion)
+                        subCustomView.updateViewModel(viewModel: viewModel) // Correctly calling the method
+                        subCustomView.alpha = 1
+                        customSubview.alpha = 0
+                    }
                 case .burns:
                     break
                 case .headInjury:
@@ -274,10 +301,12 @@ extension InjuriesandTraumasInfoViewController: InjuriesAndTraumasListViewDelega
                                 overlayView.removeFromSuperview()
                         }
                     }
-                    let item = InjuriesAndTraumasModel(imageName: "headInjury", title: "Травма голови", typeOfTransition: .headInjury)
+                    let item = InjuriesAndTraumasModel(whatPicture: .front, imageName: .headInjury, title: "Травма голови", typeOfTransition: .headInjury)
                     self?.viewModel.markedInjuriesandTraumasList.append(item)
+                    self?.viewModel.isHeadImageOnFront = true
                     self?.collectionView.reloadData()
                 case .marksWithTheHelpOfGesture:
+                   
                     subCustomView.alpha = 1
                     customSubview.alpha = 0
                 case .none:
@@ -291,9 +320,11 @@ extension InjuriesandTraumasInfoViewController: InjuriesAndTraumasListViewDelega
         if let overlayView = view.viewWithTag(999) {
             overlayView.removeFromSuperview()
         }
+        //TODO: - update for all title
         collectionView.reloadData()
         let vc = SetWoundingController()
-        vc.setupModel(model)
+        vc.delegate = self
+        vc.setupModel(model, woundList: viewModel.woundList)
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
@@ -378,7 +409,6 @@ extension InjuriesandTraumasInfoViewController: InjuriesAndTraumasListDetailView
         if let overlayView = view.viewWithTag(999),
            let customSubview = overlayView.subviews.first(where: { $0 is InjuriesAndTraumasListView }),
            let subCustomView = overlayView.subviews.last(where: { $0 is InjuriesAndTraumasListDetailView }) as? InjuriesAndTraumasListDetailView {
-           
             UIView.animate(withDuration: 0.2) {
                 let viewModel = InjuriesAndTraumasListDetailViewModel(type: .percussion)
                 subCustomView.updateViewModel(viewModel: viewModel) // Correctly calling the method
@@ -387,7 +417,26 @@ extension InjuriesandTraumasInfoViewController: InjuriesAndTraumasListDetailView
                     customSubview.alpha = 1
                 }
             }
-        
         }
     }
 }
+
+
+
+extension InjuriesandTraumasInfoViewController: SetWoundingControllerDelegate {
+    func getWoundList(woundList: [Wound], model: SetWoundingControllerViewModel) {
+        for wound in woundList {
+            if !self.viewModel.woundList.contains(wound) {
+                self.viewModel.woundList.append(wound)
+                }
+        }
+        
+        let item = InjuriesAndTraumasModel(whatPicture: model.isOnBackSide ? .back : .front, imageName: model.imageName!, title: model.imageName!.title , typeOfTransition: .marksWithTheHelpOfGesture)
+        viewModel.addNewItemInmarkedInjuriesandTraumasList(item: item)
+        collectionView.reloadData()
+
+    }
+}
+
+
+

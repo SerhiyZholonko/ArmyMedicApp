@@ -8,16 +8,18 @@
 import UIKit
 
 
+
 struct InjuriesandTraumasInfoViewControllerViewModel {
      //MARK: - Properties
-    
+    // selected wound
+    var woundList: [Wound] = []
+    //TODO: item if update woundList
     var markedInjuriesandTraumasList: [InjuriesAndTraumasModel] = []
-    let colorsSetList: [String] = []
-//var isPreliminaryDiagnosis = false
+//    let colorsSetList: [String] = []
     var preliminaryDiagnosis: String = ""
    
     var tourniquetList: [Tourniquet] = []
-
+    var isHeadImageOnFront: Bool = false
     var tourniquetHeight: CGFloat {
         return CGFloat(tourniquetList.count * 103)
     }
@@ -34,6 +36,21 @@ struct InjuriesandTraumasInfoViewControllerViewModel {
     
     mutating func addNewTourniquet(_ tourniquet: Tourniquet) {
         tourniquetList.append(tourniquet)
+    }
+    mutating func addNewItemInmarkedInjuriesandTraumasList(item: InjuriesAndTraumasModel) {
+        if !self.markedInjuriesandTraumasList.contains(where: { $0 == item }) {
+            self.markedInjuriesandTraumasList.append(item)
+        }
+    }
+    mutating func deleteItemFromColorList(model: InjuriesAndTraumasModel) {
+       //TODO: - Remove item from color view
+        let wound = model.getWound(isOnBackSide: true, x: 1, y: 1)
+        let type = wound.type
+        woundList.removeAll { item in
+            item.type == type
+        }
+        markedInjuriesandTraumasList.removeAll { $0 == model }
+        
     }
     func getTourniquet(indexPath: IndexPath) -> Tourniquet {
         return tourniquetList[indexPath.item]

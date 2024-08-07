@@ -36,7 +36,8 @@ class BottomView: UIView {
 	}
 	//MARK: - Functions
     func setIsEnableRightButton(_ bool: Bool) {
-        nextButton.isEnabled = bool
+        //TODO: - 
+//        nextButton.isEnabled = bool
         if bool {
             nextButton.backgroundColor = .purple400
         } else {

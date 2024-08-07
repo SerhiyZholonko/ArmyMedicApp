@@ -5,20 +5,38 @@
 //  Created by apple on 28.02.2024.
 //
 
-import UIKit
+import SwiftUI
+
+protocol SetWoundingControllerDelegate: AnyObject {
+    func getWoundList(woundList: [Wound], model: SetWoundingControllerViewModel)
+}
 
 class SetWoundingController: UIViewController {
     // MARK: - Properties
-    private var image1Name: String = ""
+    weak var delegate: SetWoundingControllerDelegate?
+    private var viewModel = SetWoundingControllerViewModel()
+
     private let mainImage1 = UIImage(named: "body front")
     private let mainImage2 = UIImage(named: "body back")
     private let mainImageView1 = UIImageView()
     private let mainImageView2 = UIImageView()
-    private var miniImageViews1 = [UIImageView]()
-    private var miniImageViews2 = [UIImageView]()
+    private var miniImageViews1 = [UIImageView]() {
+        didSet {
+            //update bottom view
+            bottomView.setIsEnableRightButton(miniImageViews1.isEmpty)
+
+        }
+    }
+    private var miniImageViews2 = [UIImageView](){
+        didSet {
+            //update bottom view
+            bottomView.setIsEnableRightButton(miniImageViews2.isEmpty)
+
+        }
+    }
     private var miniMarksLocations1 = [CGPoint]()
     private var miniMarksLocations2 = [CGPoint]()
-    
+    private var isActiveMiniImageViews1: Bool = true
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Позначте на схемі"
@@ -40,8 +58,9 @@ class SetWoundingController: UIViewController {
             return view
         }()
     
-        private let forwardBackwardView: TwoButtonView = {
+        private lazy var forwardBackwardView: TwoButtonView = {
          let view = TwoButtonView()
+            view.delegate = self
             return view
         }()
     
@@ -49,31 +68,106 @@ class SetWoundingController: UIViewController {
             let view = BottomView()
             view.setTitleForRightButton("Очистити")
             view.setTitleForLeftButton("Зберегти")
-            view.setIsEnableRightButton(true)
+            view.setIsEnableRightButton(viewModel.woundList.isEmpty)
             view.delegate = self
             return view
         }()
     
     // MARK: - Lifecycle
-    init() {
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         addScrollView()
+        configureViewModel()
+        bottomView.setIsEnableRightButton(viewModel.woundList.isEmpty)
+
     }
-    
     // MARK: - Functions
-    func setupModel(_ model: InjuriesAndTraumasModel) {
-         imageSubTitleLabel.setTitle(model) // Uncomment if needed
-        image1Name = model.imageName
+
+    private func backButtonIsActive() -> Bool {
+        var isActive: Bool = false
+        guard  !miniImageViews1.isEmpty || !miniImageViews2.isEmpty else { return isActive}
+        isActive.toggle()
+        return isActive
     }
+    func backDidActive() {
+        forwardBackwardView.backButtonIsActive(isActive: backButtonIsActive())
+    }
+    func setupModel(_ model: InjuriesAndTraumasModel, woundList: [Wound]) {
+         imageSubTitleLabel.setTitle(model) // Uncomment if needed
+        viewModel.image1Name = model.imageName.rawValue
+        viewModel.imageName = model.imageName
+        viewModel.woundList = woundList
+        viewModel.woundList.forEach { wound in
+            switch wound.weaponType {
+                case 1:
+                    if !wound.isOnBackSide {
+                        addMiniMark1(at: CGPointMake(CGFloat(wound.x), CGFloat(wound.y)), imageName: "fragmentary")
+                    } else {
+                        addMiniMark2(at: CGPointMake(CGFloat(wound.x), CGFloat(wound.y)), imageName: "fragmentary")
+                    }
+                    
+                case 2:
+                    if !wound.isOnBackSide {
+                        addMiniMark1(at: CGPointMake(CGFloat(wound.x), CGFloat(wound.y)), imageName: "balloon")
+                    } else {
+                        addMiniMark2(at: CGPointMake(CGFloat(wound.x), CGFloat(wound.y)), imageName: "balloon")
+                    }
+                    
+                case 3:
+                    if !wound.isOnBackSide {
+                        addMiniMark1(at: CGPointMake(CGFloat(wound.x), CGFloat(wound.y)), imageName: "mine:IED")
+                    } else {
+                        addMiniMark2(at: CGPointMake(CGFloat(wound.x), CGFloat(wound.y)), imageName: "mine:IED")
+                    }
+                case 6:
+                    if !wound.isOnBackSide {
+                        addMiniMark1(at: CGPointMake(CGFloat(wound.x), CGFloat(wound.y)), imageName: "amputation")
+                    } else {
+                        addMiniMark2(at: CGPointMake(CGFloat(wound.x), CGFloat(wound.y)), imageName: "amputation")
+                    }
+                default:
+                    break
+                }
+        }
+    }
+    private func addMiniMark1(at location: CGPoint, imageName: String) {
+let width = mainImageView1.frame.width
+        let miniImageView = UIImageView(image: UIImage(named: imageName))
+        miniImageView.translatesAutoresizingMaskIntoConstraints = false
+        miniImageView.widthAnchor.constraint(equalToConstant: width > 200 ? 40 : 40).isActive = true
+        miniImageView.heightAnchor.constraint(equalToConstant: width > 200 ? 40 : 40).isActive = true
+        mainImageView1.addSubview(miniImageView)
+        
+        
+        let addWidth = ((mainImageView1.frame.width)) - 5
+        // Directly use the location without converting it to a percentage
+        NSLayoutConstraint.activate([
+            miniImageView.centerXAnchor.constraint(equalTo: mainImageView1.leftAnchor, constant: location.x + addWidth),
+            miniImageView.centerYAnchor.constraint(equalTo: mainImageView1.topAnchor, constant: location.y)
+        ])
+    }
+    private func addMiniMark2(at location: CGPoint, imageName: String) {
+        let width = mainImageView2.frame.width
+        let miniImageView = UIImageView(image: UIImage(named: imageName))
+        miniImageView.translatesAutoresizingMaskIntoConstraints = false
+        miniImageView.widthAnchor.constraint(equalToConstant: width > 200 ? 40 : 40).isActive = true
+        miniImageView.heightAnchor.constraint(equalToConstant: width > 200 ? 40 : 40).isActive = true
+        mainImageView2.addSubview(miniImageView)
+        
+        
+        let addWidth = ((mainImageView2.frame.width)) - 5
+        // Directly use the location without converting it to a percentage
+        NSLayoutConstraint.activate([
+            miniImageView.centerXAnchor.constraint(equalTo: mainImageView2.leftAnchor, constant: location.x + addWidth),
+            miniImageView.centerYAnchor.constraint(equalTo: mainImageView2.topAnchor, constant: location.y)
+        ])
+    }
+    private func configureViewModel() {
+        viewModel.delegate = self
+    }
+   
+      
     private func addScrollView() {
         let scrollView = UIScrollView()
         view.addSubview(scrollView)
@@ -125,6 +219,7 @@ class SetWoundingController: UIViewController {
         ])
         
         scrollView.contentSize = CGSize(width: imageViewWidth * 2 + 10, height: imageViewHeight)
+
     }
     
     private func configureUI() {
@@ -167,7 +262,29 @@ class SetWoundingController: UIViewController {
             bottomView.heightAnchor.constraint(equalToConstant: 48)
         ])
     }
+    private func addMiniMark1(at location: CGPoint) {
+        let miniImageView = UIImageView(image: UIImage(named: viewModel.image1Name))
+        miniImageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        miniImageView.center = location
+        mainImageView1.addSubview(miniImageView)
+        miniImageViews1.append(miniImageView)
+        miniMarksLocations1.append(location)
+        //bottomView.setIsEnableRightButton(false)
+        backDidActive()
+        isActiveMiniImageViews1 = true
+    }
     
+    private func addMiniMark2(at location: CGPoint) {
+        let miniImageView = UIImageView(image: UIImage(named: viewModel.image1Name))
+        miniImageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        miniImageView.center = location
+        mainImageView2.addSubview(miniImageView)
+        miniImageViews2.append(miniImageView)
+        miniMarksLocations2.append(location)
+       // bottomView.setIsEnableRightButton(false)
+        backDidActive()
+        isActiveMiniImageViews1 = false
+    }
     @objc
     private func imageTapped1(_ sender: UITapGestureRecognizer) {
         let location = sender.location(in: mainImageView1)
@@ -179,25 +296,6 @@ class SetWoundingController: UIViewController {
         let location = sender.location(in: mainImageView2)
         addMiniMark2(at: location)
     }
-    
-    private func addMiniMark1(at location: CGPoint) {
-        let miniImageView = UIImageView(image: UIImage(named: image1Name))
-        miniImageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        miniImageView.center = location
-        mainImageView1.addSubview(miniImageView)
-        miniImageViews1.append(miniImageView)
-        miniMarksLocations1.append(location)
-    }
-    
-    private func addMiniMark2(at location: CGPoint) {
-        let miniImageView = UIImageView(image: UIImage(named: image1Name))
-        miniImageView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        miniImageView.center = location
-        mainImageView2.addSubview(miniImageView)
-        miniImageViews2.append(miniImageView)
-        miniMarksLocations2.append(location)
-    }
-    
     @objc
     private func cancelButtonTapped() {
         for miniImageView in miniImageViews1 {
@@ -210,13 +308,27 @@ class SetWoundingController: UIViewController {
         miniImageViews2.removeAll()
         miniMarksLocations1.removeAll()
         miniMarksLocations2.removeAll()
+
     }
     
     @objc
     private func saveButtonTapped() {
-        print("Mini marks locations for image 1: \(miniMarksLocations1)")
-        print("Mini marks locations for image 2: \(miniMarksLocations2)")
-        // Save the locations to your desired storage or use them as needed
+        miniMarksLocations1.forEach { miniMarksLocations in
+            viewModel.isOnBackSide = false
+            viewModel.x = Int(miniMarksLocations.x)
+            viewModel.y = Int(miniMarksLocations.y)
+            if  let wound: Wound = viewModel.getWound() {
+                viewModel.addItemToWoundList(wound)
+            }
+        }
+        miniMarksLocations2.forEach { miniMarksLocations in
+            viewModel.isOnBackSide = true
+            viewModel.x = Int(miniMarksLocations.x)
+            viewModel.y = Int(miniMarksLocations.y)
+            if  let wound: Wound = viewModel.getWound() {
+                viewModel.addItemToWoundList(wound)
+            }
+        }
     }
     
     @objc
@@ -233,6 +345,60 @@ extension SetWoundingController: BottomViewDelegate {
     }
     
     func moveToBackSection() {
+        viewModel.clearWoundList()
+        for miniImageView in miniImageViews1 {
+            miniImageView.removeFromSuperview()
+        }
+        for miniImageView in miniImageViews2 {
+            miniImageView.removeFromSuperview()
+        }
+        miniImageViews1.removeAll()
+        miniImageViews2.removeAll()
+        miniMarksLocations1.removeAll()
+        miniMarksLocations2.removeAll()
+        backDidActive()
+    }
+}
+
+
+
+//MARK: - Delagate
+
+extension SetWoundingController: TwoButtonViewDelegate {
+    func backButtonDidTap() {
+        viewModel.woundListRemoveLast()
+        removeLastMiniImageView()
+    }
+    private func removeLastMiniImageView() {
+        if  !miniImageViews1.isEmpty, isActiveMiniImageViews1, let lastMiniImageView = miniImageViews1.popLast() {
+            lastMiniImageView.removeFromSuperview()
+            backDidActive()
+            if miniImageViews1.isEmpty {
+                isActiveMiniImageViews1 = false
+            }
+        }
+        if !miniImageViews2.isEmpty, !isActiveMiniImageViews1, let lastMiniImageView = miniImageViews2.popLast() {
+            lastMiniImageView.removeFromSuperview()
+            backDidActive()
+            if miniImageViews2.isEmpty {
+                isActiveMiniImageViews1 = true
+            }
+        }
         
+        // Optionally, remove the last location from the marks locations
+        _ = miniMarksLocations1.popLast()
+          _ = miniMarksLocations2.popLast()
+    }
+}
+
+extension SetWoundingController: SetWoundingControllerViewModelDelegate {
+    func updateBottomView(woundListIsEmpty: Bool) {
+        bottomView.setIsEnableRightButton(!woundListIsEmpty)
+    }
+    func viewModelDidUpdate(viewModel: SetWoundingControllerViewModel) {
+        DispatchQueue.main.async { [weak self] in
+            self?.viewModel = viewModel
+            self?.delegate?.getWoundList(woundList: viewModel.getWoundList(), model: viewModel)
+        }
     }
 }

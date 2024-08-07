@@ -250,7 +250,7 @@ extension InjuriesAndWoundsController: InjuriesInjuryViewDelegate {
 
 extension InjuriesAndWoundsController: WeaponCausedTheInjuryViewDelegate {
 	func presentVC(weapontype: WeaponCausedTheInjuryTitle, injuriesInjuryType: InjuriesInjuryTitle) {
-//		let vc = SetWoundingController(viewModel: SetWoundingControllerViewModel(typeInjuries: injuriesInjuryType, typeWounding: weapontype))
+
 //		vc.modalPresentationStyle = .fullScreen
 //		vc.modalTransitionStyle = .crossDissolve
 //		self.present(vc, animated: true)
